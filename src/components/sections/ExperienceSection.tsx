@@ -63,7 +63,7 @@ export default function ExperienceSection() {
                   <Icon size={20} color="#299dd9" />
                 </div>
                 <h3
-                  className="text-base font-bold text-[#1a1a1a] leading-relaxed"
+                  className="text-xl font-bold text-[#1a1a1a] leading-relaxed"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
                   {/* 背景グラデーションで文字の下部に重なるアンダーバーを描画 */}

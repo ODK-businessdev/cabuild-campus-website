@@ -33,7 +33,7 @@ export default function TestimonialsSection() {
     <section className="bg-[#edf7fd] py-24 px-6">
       <div className="max-w-2xl mx-auto">
         {/* セクションヘッダー */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <h2
             className="text-2xl md:text-3xl font-bold text-[#1a1a1a] mb-4"
             style={{ fontFamily: 'var(--font-heading)' }}
@@ -43,10 +43,19 @@ export default function TestimonialsSection() {
           <p className="text-sm text-[#4a4a4a] leading-relaxed">
             実際に利用した学生にインタビューを実施しました。
           </p>
-          <p className="text-base text-[#4a4a4a] mt-6 py-4">
-            Q. 利用してみてあなた<strong className="font-bold text-[#1a1a1a]">自身の変化</strong>やサービスに<strong className="font-bold text-[#1a1a1a]">魅力</strong>を感じたことはありましたか？
-          </p>
         </div>
+        <p className="text-base text-[#4a4a4a] text-center mb-12 mt-4">
+          <span
+            style={{
+              backgroundImage: 'linear-gradient(rgba(41,157,217,0.6), rgba(41,157,217,0.6))',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: '100% 4px',
+              backgroundPosition: '0 92%',
+            }}
+          >
+            Q. 利用してみてあなた<strong className="font-bold text-[#1a1a1a]">自身の変化</strong>やサービスに<strong className="font-bold text-[#1a1a1a]">魅力</strong>を感じたことはありましたか？
+          </span>
+        </p>
 
         {/* カルーセル */}
         <div className="relative">

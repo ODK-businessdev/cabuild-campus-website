@@ -9,6 +9,7 @@ const steps = [
 const phaseInfo = {
   'FIRST STEP': {
     description: 'まず集中して取り組む',
+    heading: 'まずはここから始める',
     numberBg: '#ffffff',
     numberText: '#299dd9',
     lineColor: 'rgba(255,255,255,0.5)',
@@ -19,6 +20,7 @@ const phaseInfo = {
   },
   'SECOND STEP': {
     description: '選考のタイミングで使う',
+    heading: '選考対策を始める',
     numberBg: '#ffffff',
     numberText: '#8fc23f',
     lineColor: 'rgba(255,255,255,0.5)',
@@ -66,15 +68,20 @@ export default function HowToSection() {
             return (
               <div key={`steps-${phase.name}`} className="pb-8">
                 {/* フェーズラベル */}
-                <div className="flex items-center gap-3 mb-6">
+                <div className="flex items-center gap-3 mb-3">
                   <span
                     className="inline-flex items-center px-3 py-1 rounded text-xs font-bold tracking-widest"
                     style={{ backgroundColor: '#ffffff', color: info.numberText }}
                   >
                     {phase.name}
                   </span>
-                  <span className="text-sm text-white/80">{info.description}</span>
                 </div>
+                <p
+                  className="text-2xl font-bold text-white mb-6"
+                  style={{ fontFamily: 'var(--font-heading)' }}
+                >
+                  {info.heading}
+                </p>
 
                 {/* ステップ一覧 */}
                 <div className="flex flex-col">
@@ -96,7 +103,7 @@ export default function HowToSection() {
                           {[1, 2, 3].map((n) => (
                             <div
                               key={n}
-                              className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold"
+                              className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold"
                               style={{
                                 backgroundColor: 'rgba(255,255,255,0.25)',
                                 color: 'rgba(255,255,255,0.65)',
@@ -107,7 +114,7 @@ export default function HowToSection() {
                           ))}
                         </div>
                         <p
-                          className="text-xs"
+                          className="text-sm"
                           style={{ color: 'rgba(255,255,255,0.65)', fontFamily: 'var(--font-heading)' }}
                         >
                           FIRST STEPより続く
@@ -144,7 +151,7 @@ export default function HowToSection() {
                         {/* 右: テキスト */}
                         <div className="pb-6 pt-2 flex-1">
                           <p
-                            className="text-base font-bold text-white"
+                            className="text-xl font-bold text-white"
                             style={{ fontFamily: 'var(--font-heading)' }}
                           >
                             {step.title}

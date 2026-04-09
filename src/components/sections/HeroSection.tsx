@@ -10,7 +10,7 @@ export default function HeroSection() {
           <div className="flex flex-col gap-6">
             {/* キャッチコピー */}
             <h1
-              className="text-[4.5rem] md:text-[6.75rem] font-bold text-[#1a1a1a] leading-tight"
+              className="text-[4.05rem] md:text-[6.075rem] font-bold text-[#1a1a1a] leading-tight"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
               就活は、

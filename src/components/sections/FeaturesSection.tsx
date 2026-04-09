@@ -159,7 +159,7 @@ export default function FeaturesSection() {
                 </div>
                 <div>
                   <h3
-                    className="text-lg font-bold text-[#1a1a1a]"
+                    className="text-2xl font-bold text-[#1a1a1a]"
                     style={{ fontFamily: 'var(--font-heading)' }}
                   >
                     {selected.title}
