@@ -1,0 +1,95 @@
+
+<style>
+  .wrap{background:#f5f5f7;border-radius:16px;padding:20px;max-width:520px;margin:0 auto}
+  .win{background:#fff;border-radius:12px;border:0.5px solid #e0e0e0;overflow:hidden}
+  .hdr{padding:14px 16px 10px;border-bottom:0.5px solid #eee}
+  .hdr-t{font-size:15px;font-weight:500;color:#1a1a1a;margin:0}
+  .hdr-s{font-size:12px;color:#888;margin:2px 0 0}
+  .body{padding:16px;min-height:380px;display:flex;flex-direction:column;gap:12px}
+  .row{display:flex;gap:8px;align-items:flex-start;opacity:0;transform:translateY(6px);transition:opacity 0.4s ease,transform 0.4s ease}
+  .row.show{opacity:1;transform:translateY(0)}
+  .ai-icon{width:28px;height:28px;border-radius:50%;background:#2BBFA8;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .ai-icon span{color:#fff;font-size:10px;font-weight:500}
+  .bai{background:#eff4f2;border-radius:4px 12px 12px 12px;padding:10px 14px;font-size:13px;color:#1a1a1a;line-height:1.6;max-width:320px}
+  .row-u{justify-content:flex-end}
+  .bu{background:#d6eeea;border-radius:12px 4px 12px 12px;padding:10px 14px;font-size:13px;color:#1a1a1a;line-height:1.6;max-width:300px}
+  .result{background:#eff4f2;border-radius:4px 12px 12px 12px;padding:10px 14px;font-size:13px;color:#1a1a1a;line-height:1.6;max-width:320px}
+  .rlabel{font-size:11px;color:#2BBFA8;font-weight:500;margin-bottom:4px}
+  .cursor{display:inline-block;width:2px;height:12px;background:#1a1a1a;margin-left:2px;vertical-align:middle;animation:blink 0.8s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+  .inp{padding:10px 14px;border-top:0.5px solid #eee;display:flex;align-items:center;gap:8px}
+  .inp-mock{flex:1;font-size:13px;color:#aaa}
+  .sbtn{width:32px;height:32px;border-radius:50%;background:#2BBFA8;display:flex;align-items:center;justify-content:center}
+  .sbtn svg{width:14px;height:14px;fill:#fff}
+</style>
+
+<div class="wrap">
+  <div class="win">
+    <div class="hdr">
+      <p class="hdr-t">自己分析 — 大学時代</p>
+      <p class="hdr-s">Situation（状況）</p>
+    </div>
+    <div class="body">
+      <div class="row" id="m1">
+        <div class="ai-icon"><span>AI</span></div>
+        <div class="bai">大学時代、なぜサッカーを続けられたと思いますか？<span class="cursor" id="c1" style="display:none"></span></div>
+      </div>
+      <div class="row row-u" id="m2">
+        <div class="bu">うまくなりたかったわけじゃないけど、なんとなく</div>
+      </div>
+      <div class="row" id="m3">
+        <div class="ai-icon"><span>AI</span></div>
+        <div class="bai">「なんとなく」の正体は何だと思いますか？<span class="cursor" id="c3" style="display:none"></span></div>
+      </div>
+      <div class="row row-u" id="m4">
+        <div class="bu">多分チームが好きだったのかも。誰かと一緒にいる感じ</div>
+      </div>
+      <div class="row" id="m5">
+        <div class="ai-icon"><span>AI</span></div>
+        <div class="result">
+          <div class="rlabel">分析</div>
+          それ、"人と一緒に何かを作ること"が原動力なんですね。<span class="cursor" id="c5" style="display:none"></span>
+        </div>
+      </div>
+      <div class="row row-u" id="m6">
+        <div class="bu">言われてみれば、ずっとそうだったかも！例えば、大会前の合宿で・・・</div>
+      </div>
+    </div>
+    <div class="inp">
+      <div class="inp-mock">メッセージを入力...</div>
+      <div class="sbtn"><svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const seq = [
+  {id:'m1', cursor:'c1', pre:667, type:833},
+  {id:'m2', pre:583},
+  {id:'m3', cursor:'c3', pre:667, type:750},
+  {id:'m4', pre:583},
+  {id:'m5', cursor:'c5', pre:750, type:917},
+  {id:'m6', pre:667},
+];
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+async function run() {
+  for (const s of seq) {
+    await sleep(s.pre);
+    document.getElementById(s.id).classList.add('show');
+    if (s.cursor) {
+      const c = document.getElementById(s.cursor);
+      c.style.display = 'inline-block';
+      await sleep(s.type);
+      c.style.display = 'none';
+    }
+  }
+  await sleep(2500);
+  seq.forEach(s => {
+    document.getElementById(s.id).classList.remove('show');
+    if (s.cursor) document.getElementById(s.cursor).style.display = 'none';
+  });
+  await sleep(500);
+  run();
+}
+run();
+</script>
