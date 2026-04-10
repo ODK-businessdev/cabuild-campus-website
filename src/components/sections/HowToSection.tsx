@@ -1,187 +1,280 @@
-const steps = [
-  { number: 1, title: '診断を受ける', phase: 'FIRST STEP' },
-  { number: 2, title: '自己分析をする', phase: 'FIRST STEP' },
-  { number: 3, title: '企業研究をする', phase: 'FIRST STEP' },
-  { number: 4, title: 'ESを作成・添削する', phase: 'SECOND STEP' },
-  { number: 5, title: '面接練習をする', phase: 'SECOND STEP' },
-]
+'use client'
 
-const phaseInfo = {
-  'FIRST STEP': {
-    description: 'まず集中して取り組む',
-    heading: 'まずはここから始める',
-    numberBg: '#ffffff',
-    numberText: '#299dd9',
-    lineColor: 'rgba(255,255,255,0.5)',
-    targets: [
-      { label: '大学1・2年生', description: '長期インターンや自己理解の入口として' },
-      { label: '大学3年生〜', description: 'サマーインターン・本選考前の集中準備として' },
+import { useState } from 'react'
+
+type Grade = 1 | 2 | 3 | 4
+
+type StepCard = {
+  phase: string
+  phaseColor: 'blue' | 'green' | 'neutral'
+  title: string
+  steps: string[]
+  ordered: boolean
+  start?: number
+}
+
+type GradeData = {
+  year: string
+  title: string
+  subtitle: string
+  cards: [StepCard, StepCard]
+  note: string
+}
+
+const gradeData: Record<Grade, GradeData> = {
+  1: {
+    year: 'YEAR 1',
+    title: 'まず「自分」を知るところから',
+    subtitle: 'バイト・ゼミ・サークル選びを就活目線で考え始める',
+    cards: [
+      {
+        phase: 'FIRST STEP',
+        phaseColor: 'blue',
+        title: '自己理解を深める',
+        steps: [
+          '診断を受ける — 自分の強みや価値観を把握',
+          '自己分析をする — バイト・ゼミ選びの軸を言語化',
+          '企業研究をする — 業界をゆるく知る',
+        ],
+        ordered: true,
+        start: 1,
+      },
+      {
+        phase: '活用シーン',
+        phaseColor: 'neutral',
+        title: 'こんなときに使おう',
+        steps: [
+          'バイト・ゼミを決める前の「自己理解」の入口として',
+          'サークルや課外活動の選び方を整理したいとき',
+          '将来なんとなく気になる業界を調べる入門として',
+        ],
+        ordered: false,
+      },
     ],
+    note: '今は焦らなくてOK。診断・自己分析だけ先にやっておくと、バイトやゼミ選びの「理由」が明確になり、後の就活でそのまま語れるエピソードになります。',
   },
-  'SECOND STEP': {
-    description: '選考のタイミングで使う',
-    heading: '選考対策を始める',
-    numberBg: '#ffffff',
-    numberText: '#8fc23f',
-    lineColor: 'rgba(255,255,255,0.5)',
-    targets: [
-      { label: '大学1・2年生', description: '長期インターンのエントリー時に' },
-      { label: '大学3年生〜', description: 'インターン・本選考のエントリー時に' },
+  2: {
+    year: 'YEAR 2',
+    title: '長期インターンへの準備を本格化',
+    subtitle: 'エントリーシートの基礎を作り、実務経験を積み始める',
+    cards: [
+      {
+        phase: 'FIRST STEP',
+        phaseColor: 'blue',
+        title: '土台をつくる',
+        steps: [
+          '診断を受ける — 自分の強みを確認',
+          '自己分析をする — 長期インターン応募の軸を整理',
+          '企業研究をする — 志望業界・職種を絞る',
+        ],
+        ordered: true,
+        start: 1,
+      },
+      {
+        phase: 'SECOND STEP',
+        phaseColor: 'green',
+        title: '選考対策へ',
+        steps: [
+          'ESを作成・添削 — 長期インターンのES対策',
+          '面接練習 — インターン選考の面接準備',
+        ],
+        ordered: true,
+        start: 4,
+      },
     ],
+    note: '長期インターンのエントリー時期に合わせてES作成と面接練習を集中的に。2年生のうちに実務経験を積むと、3年生での就活が圧倒的に楽になります。',
   },
-} as const
+  3: {
+    year: 'YEAR 3',
+    title: 'サマーインターン・早期選考を狙う',
+    subtitle: '夏までに全ステップを完走し、秋の早期内定を獲りにいく',
+    cards: [
+      {
+        phase: 'FIRST STEP（春）',
+        phaseColor: 'blue',
+        title: '5月までに完了させる',
+        steps: [
+          '診断を受ける',
+          '自己分析をする — ガクチカ・志望動機を仮確定',
+          '企業研究をする — サマーインターン候補を洗い出す',
+        ],
+        ordered: true,
+        start: 1,
+      },
+      {
+        phase: 'SECOND STEP（夏〜秋）',
+        phaseColor: 'green',
+        title: '選考を突破する',
+        steps: [
+          'ESを作成・添削 — サマーインターンES提出',
+          '面接練習 — インターン→早期選考の通し対策',
+        ],
+        ordered: true,
+        start: 4,
+      },
+    ],
+    note: 'サマーインターン（6月締切目安）のESと面接練習が最優先。インターン参加後に早期選考ルートに乗れるかが勝負。秋には本選考ESの添削も同時並行で進めましょう。',
+  },
+  4: {
+    year: 'YEAR 4',
+    title: '今すぐ動く、全力で追い上げる',
+    subtitle: '本選考ESと面接対策に集中して内定を獲りにいく',
+    cards: [
+      {
+        phase: 'FIRST STEP（即着手）',
+        phaseColor: 'blue',
+        title: '今週中に終わらせる',
+        steps: [
+          '診断を受ける — 強みを即把握',
+          '自己分析をする — ガクチカ・志望動機を急ぎ確定',
+          '企業研究をする — 応募企業を絞り込む',
+        ],
+        ordered: true,
+        start: 1,
+      },
+      {
+        phase: 'SECOND STEP（並行）',
+        phaseColor: 'green',
+        title: '選考を同時進行',
+        steps: [
+          'ESを作成・添削 — 本選考ESを片っ端から提出',
+          '面接練習 — 本番形式で繰り返しトレーニング',
+        ],
+        ordered: true,
+        start: 4,
+      },
+    ],
+    note: 'FIRST STEPと並行してすぐにES提出・面接練習を始めてください。時間がない分、ES添削と面接練習の回数が勝負。まず1社出すことが最初のゴールです。',
+  },
+}
 
-type PhaseName = keyof typeof phaseInfo
+const grades: Grade[] = [1, 2, 3, 4]
+const gradeLabels: Record<Grade, string> = {
+  1: '大学1年生',
+  2: '大学2年生',
+  3: '大学3年生',
+  4: '大学4年生',
+}
 
-const phases: { name: PhaseName; steps: typeof steps }[] = [
-  { name: 'FIRST STEP', steps: steps.filter((s) => s.phase === 'FIRST STEP') },
-  { name: 'SECOND STEP', steps: steps.filter((s) => s.phase === 'SECOND STEP') },
-]
+const phaseTagStyle: Record<StepCard['phaseColor'], { backgroundColor: string; color: string }> = {
+  blue:    { backgroundColor: '#299dd9', color: '#ffffff' },
+  green:   { backgroundColor: '#8fc23f', color: '#ffffff' },
+  neutral: { backgroundColor: '#e5e5e5', color: '#4a4a4a' },
+}
 
 export default function HowToSection() {
+  const [selectedGrade, setSelectedGrade] = useState<Grade>(1)
+  const data = gradeData[selectedGrade]
+
   return (
     <section id="howto" className="bg-[#299dd9] py-24 px-6">
       <div className="max-w-6xl mx-auto">
         {/* セクションヘッダー */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <h2
             className="text-2xl md:text-3xl font-bold text-white mb-4"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
             使い方・流れ
           </h2>
-          <p className="text-base text-white/80 max-w-xl mx-auto leading-relaxed">
-            2つのフェーズで、就活準備から選考まで一気通貫でサポートします。
+          <p className="text-base text-white font-medium max-w-xl mx-auto leading-relaxed">
+            あなたの学年を選んでください
           </p>
         </div>
 
-        {/*
-          2×2グリッド:
-          - 1行目: 各フェーズのステップエリア（高さが揃う）
-          - 2行目: 各フェーズのターゲットカード（上辺が自動的に揃う）
-        */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-0">
-
-          {/* ====== 1行目: ステップエリア ====== */}
-          {phases.map((phase) => {
-            const info = phaseInfo[phase.name]
+        {/* タブボタン */}
+        <div className="flex flex-wrap gap-2 justify-center mb-8" role="tablist">
+          {grades.map((grade) => {
+            const isActive = selectedGrade === grade
             return (
-              <div key={`steps-${phase.name}`} className="pb-8">
-                {/* フェーズラベル */}
-                <div className="flex items-center gap-3 mb-3">
-                  <span
-                    className="inline-flex items-center px-3 py-1 rounded text-xs font-bold tracking-widest"
-                    style={{ backgroundColor: '#ffffff', color: info.numberText }}
-                  >
-                    {phase.name}
+              <button
+                key={grade}
+                role="tab"
+                aria-selected={isActive}
+                onClick={() => setSelectedGrade(grade)}
+                className="px-5 py-2 rounded-full text-sm transition-all duration-200"
+                style={{
+                  backgroundColor: isActive ? '#ffffff' : 'transparent',
+                  color: isActive ? '#299dd9' : '#ffffff',
+                  border: isActive ? '1px solid #ffffff' : '1px solid rgba(255,255,255,0.65)',
+                  fontWeight: isActive ? 600 : 500,
+                }}
+              >
+                {gradeLabels[grade]}
+              </button>
+            )
+          })}
+        </div>
+
+        {/* パネル */}
+        <div role="tabpanel">
+          {/* ヒーロー + 補足メモ（2カラム） */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 items-start">
+            {/* 左: ヒーロー */}
+            <div>
+              <span className="text-sm font-bold tracking-widest block mb-3 text-white">
+                {data.year}
+              </span>
+              <h3
+                className="text-2xl font-bold text-white mb-3"
+                style={{ fontFamily: 'var(--font-heading)' }}
+              >
+                {data.title}
+              </h3>
+              <p className="text-sm text-white font-medium">
+                {data.subtitle}
+              </p>
+            </div>
+
+            {/* 右: 補足メモ */}
+            <div className="md:pt-8">
+              <p className="text-sm leading-relaxed text-white font-medium">
+                {data.note.split('。').filter(Boolean).map((sentence, i, arr) => (
+                  <span key={i}>
+                    {sentence}。
+                    {i < arr.length - 1 && <br />}
                   </span>
-                </div>
+                ))}
+              </p>
+            </div>
+          </div>
+
+          {/* 2カラムカード */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {data.cards.map((card, i) => (
+              <div key={i} className="bg-white rounded-xl p-5">
+                <span
+                  className="inline-flex items-center px-3 py-0.5 rounded text-xs font-bold tracking-widest mb-3"
+                  style={phaseTagStyle[card.phaseColor]}
+                >
+                  {card.phase}
+                </span>
                 <p
-                  className="text-2xl font-bold text-white mb-6"
+                  className="text-sm font-bold text-[#1a1a1a] mb-2"
                   style={{ fontFamily: 'var(--font-heading)' }}
                 >
-                  {info.heading}
+                  {card.title}
                 </p>
-
-                {/* ステップ一覧 */}
-                <div className="flex flex-col">
-                  {/* SECOND STEP: ①②③ゴースト＋点線でFIRST STEPとの繋がりを表現 */}
-                  {phase.name === 'SECOND STEP' && (
-                    <div className="flex gap-5">
-                      {/* 左: 点線（④⑤の円と同じ中心軸 = w-10の中央） */}
-                      <div className="w-10 shrink-0 flex justify-center">
-                        <div
-                          style={{
-                            borderLeft: '2px dashed rgba(255,255,255,0.35)',
-                            minHeight: '72px',
-                          }}
-                        />
-                      </div>
-                      {/* 右: ①②③ + テキスト */}
-                      <div className="flex flex-col justify-center gap-2 pb-4">
-                        <div className="flex items-center gap-1.5">
-                          {[1, 2, 3].map((n) => (
-                            <div
-                              key={n}
-                              className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold"
-                              style={{
-                                backgroundColor: 'rgba(255,255,255,0.25)',
-                                color: 'rgba(255,255,255,0.65)',
-                              }}
-                            >
-                              {n}
-                            </div>
-                          ))}
-                        </div>
-                        <p
-                          className="text-sm"
-                          style={{ color: 'rgba(255,255,255,0.65)', fontFamily: 'var(--font-heading)' }}
-                        >
-                          FIRST STEPより続く
-                        </p>
-                      </div>
-                    </div>
-                  )}
-
-                  {phase.steps.map((step, stepIndex) => {
-                    const isLastInPhase = stepIndex === phase.steps.length - 1
-                    return (
-                      <div key={step.number} className="flex gap-5">
-                        {/* 左: 番号 + 縦線 */}
-                        <div className="w-10 shrink-0 flex flex-col items-center">
-                          <div
-                            className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold"
-                            style={{
-                              backgroundColor: info.numberBg,
-                              color: info.numberText,
-                            }}
-                          >
-                            {step.number}
-                          </div>
-                          {!isLastInPhase && (
-                            <div
-                              className="flex-1 my-1"
-                              style={{
-                                borderLeft: `2px solid ${info.lineColor}`,
-                                minHeight: '32px',
-                              }}
-                            />
-                          )}
-                        </div>
-                        {/* 右: テキスト */}
-                        <div className="pb-6 pt-2 flex-1">
-                          <p
-                            className="text-xl font-bold text-white"
-                            style={{ fontFamily: 'var(--font-heading)' }}
-                          >
-                            {step.title}
-                          </p>
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
+                {card.ordered ? (
+                  <ol className="list-decimal pl-5 space-y-1.5" start={card.start}>
+                    {card.steps.map((step, j) => (
+                      <li key={j} className="text-sm text-[#4a4a4a] leading-relaxed">
+                        {step}
+                      </li>
+                    ))}
+                  </ol>
+                ) : (
+                  <ul className="list-disc pl-5 space-y-1.5">
+                    {card.steps.map((step, j) => (
+                      <li key={j} className="text-sm text-[#4a4a4a] leading-relaxed">
+                        {step}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
-            )
-          })}
-
-          {/* ====== 2行目: ターゲットカード（CSSグリッドが上辺を自動的に揃える） ====== */}
-          {phases.map((phase) => {
-            const info = phaseInfo[phase.name]
-            return (
-              <div key={`card-${phase.name}`} className="rounded-xl p-5 grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white">
-                {info.targets.map((target) => (
-                  <div key={target.label} className="flex flex-col gap-1">
-                    <span className="text-xs font-bold" style={{ color: info.numberText }}>
-                      {target.label}
-                    </span>
-                    <span className="text-sm text-[#4a4a4a]">{target.description}</span>
-                  </div>
-                ))}
-              </div>
-            )
-          })}
-
+            ))}
+          </div>
         </div>
       </div>
     </section>
