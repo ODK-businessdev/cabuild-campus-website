@@ -71,7 +71,7 @@ export default function TestimonialsSection() {
         <div className="relative">
           {/* カード */}
           <div className="bg-white rounded-2xl border border-[#b8dff4] p-8 min-h-48 flex flex-col justify-between">
-            <span className="text-4xl text-[#b8dff4] font-serif leading-none mb-4">"</span>
+            <span className="text-4xl text-[#b8dff4] font-serif leading-none mb-4">&quot;</span>
             <p className="text-base text-[#4a4a4a] leading-relaxed flex-1">
               {item.comment}
             </p>

@@ -122,7 +122,7 @@ export default function HeroAnimation() {
               <AiIcon />
               <div style={resultStyle}>
                 <div style={{ fontSize: '11px', color: '#2BBFA8', fontWeight: 500, marginBottom: '4px' }}>分析</div>
-                それ、"人と一緒に何かを作ること"が原動力なんですね。
+                それ、&quot;人と一緒に何かを作ること&quot;が原動力なんですね。
                 <span ref={setRef('c5')} className="ha-cursor" style={{ display: 'none' }} />
               </div>
             </div>

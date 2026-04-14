@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
@@ -17,7 +18,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* ロゴ */}
-        <a href="/" className="flex items-center gap-2 shrink-0">
+        <Link href="/" className="flex items-center gap-2 shrink-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/logo.png"
@@ -28,7 +29,7 @@ export default function Header() {
           <span className="text-sm font-medium text-gray-500 hidden sm:inline">
             キャンパス
           </span>
-        </a>
+        </Link>
 
         {/* デスクトップナビ */}
         <nav className="hidden md:flex items-center gap-8">
