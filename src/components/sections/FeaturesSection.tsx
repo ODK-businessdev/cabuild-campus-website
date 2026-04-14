@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Brain, Search, Building2, PenLine, Mic, ArrowRight } from 'lucide-react'
+import { Brain, Search, Building2, PenLine, Mic, ArrowRight, X } from 'lucide-react'
 
 type Feature = {
   icon: React.ElementType
@@ -82,6 +82,7 @@ const features: Feature[] = [
 
 export default function FeaturesSection() {
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [modalImage, setModalImage] = useState<{ src: string; title: string } | null>(null)
   const selected = features[selectedIndex]
   const Icon = selected.icon
 
@@ -167,7 +168,6 @@ export default function FeaturesSection() {
                   <p className="text-xs text-[#299dd9] mt-0.5">{selected.subtitle}</p>
                 </div>
               </div>
-              {/* CTAボタン（タイトルと同じ高さ・右寄せ） */}
               {!selected.comingSoon && selected.ctaLabel && (
                 <a
                   href="https://campus.cabuild.jp/"
@@ -201,9 +201,159 @@ export default function FeaturesSection() {
               </div>
             )}
 
+            {/* 画面プレビュー（12キャリアタイプ診断） */}
+            {selectedIndex === 0 && (
+              <div className="mt-2 relative rounded-xl overflow-hidden border border-[#e5e5e5]" style={{ height: '480px' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/career-type-assessment-v2.png"
+                  alt="12キャリアタイプ診断 アセスメント結果"
+                  style={{ width: '100%', display: 'block' }}
+                />
+                <div
+                  className="absolute inset-x-0 bottom-0"
+                  style={{
+                    height: '180px',
+                    background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.9) 55%, #ffffff)',
+                  }}
+                />
+                <div className="absolute bottom-4 right-4">
+                  <button
+                    onClick={() => setModalImage({ src: '/career-type-report-v2.png', title: '12キャリアタイプ診断 レポートサンプル' })}
+                    className="inline-flex items-center gap-2 h-10 px-5 rounded text-sm font-medium transition-colors duration-200 shadow-sm"
+                    style={{ color: '#299dd9', backgroundColor: '#ffffff', border: '1px solid #299dd9' }}
+                  >
+                    レポートのサンプルを見る
+                    <ArrowRight size={14} />
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* 画面プレビュー（企業研究AI） */}
+            {selectedIndex === 2 && (
+              <div className="mt-2 relative rounded-xl overflow-hidden border border-[#e5e5e5]" style={{ height: '480px' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/company-research-sample.png"
+                  alt="企業研究AI 画面サンプル"
+                  style={{ width: '100%', display: 'block' }}
+                />
+                <div
+                  className="absolute inset-x-0 bottom-0"
+                  style={{
+                    height: '180px',
+                    background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.9) 55%, #ffffff)',
+                  }}
+                />
+                <div className="absolute bottom-4 right-4">
+                  <button
+                    onClick={() => setModalImage({ src: '/company-research-sample.png', title: '企業研究AI 画面サンプル' })}
+                    className="inline-flex items-center gap-2 h-10 px-5 rounded text-sm font-medium transition-colors duration-200 shadow-sm"
+                    style={{ color: '#299dd9', backgroundColor: '#ffffff', border: '1px solid #299dd9' }}
+                  >
+                    レポートのサンプルを見る
+                    <ArrowRight size={14} />
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* 画面プレビュー（ES添削AI） */}
+            {selectedIndex === 3 && (
+              <div className="mt-2 relative rounded-xl overflow-hidden border border-[#e5e5e5]" style={{ height: '480px' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/es-correction-sample.png"
+                  alt="ES添削AI 画面サンプル"
+                  style={{ width: '100%', display: 'block' }}
+                />
+                <div
+                  className="absolute inset-x-0 bottom-0"
+                  style={{
+                    height: '180px',
+                    background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.9) 55%, #ffffff)',
+                  }}
+                />
+                <div className="absolute bottom-4 right-4">
+                  <button
+                    onClick={() => setModalImage({ src: '/es-correction-sample.png', title: 'ES添削AI 画面サンプル' })}
+                    className="inline-flex items-center gap-2 h-10 px-5 rounded text-sm font-medium transition-colors duration-200 shadow-sm"
+                    style={{ color: '#299dd9', backgroundColor: '#ffffff', border: '1px solid #299dd9' }}
+                  >
+                    レポートのサンプルを見る
+                    <ArrowRight size={14} />
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* 画面プレビュー（自己分析AI） */}
+            {selectedIndex === 1 && (
+              <div className="mt-2 relative rounded-xl overflow-hidden border border-[#e5e5e5]" style={{ height: '480px' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/self-analysis-sample.png"
+                  alt="自己分析AI 完了画面"
+                  style={{ width: '100%', display: 'block' }}
+                />
+                <div
+                  className="absolute inset-x-0 bottom-0"
+                  style={{
+                    height: '180px',
+                    background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.9) 55%, #ffffff)',
+                  }}
+                />
+                <div className="absolute bottom-4 right-4">
+                  <button
+                    onClick={() => setModalImage({ src: '/self-analysis-sample.png', title: '自己分析AI 完了画面サンプル' })}
+                    className="inline-flex items-center gap-2 h-10 px-5 rounded text-sm font-medium transition-colors duration-200 shadow-sm"
+                    style={{ color: '#299dd9', backgroundColor: '#ffffff', border: '1px solid #299dd9' }}
+                  >
+                    レポートのサンプルを見る
+                    <ArrowRight size={14} />
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
+
+      {/* 汎用モーダル */}
+      {modalImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ backgroundColor: 'rgba(0,0,0,0.6)' }}
+          onClick={() => setModalImage(null)}
+        >
+          <div
+            className="relative bg-white rounded-2xl overflow-hidden flex flex-col"
+            style={{ width: '100%', maxWidth: '720px', maxHeight: '88vh' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-6 py-4 border-b border-[#e5e5e5] shrink-0">
+              <p className="text-sm font-bold text-[#1a1a1a]" style={{ fontFamily: 'var(--font-heading)' }}>
+                {modalImage.title}
+              </p>
+              <button
+                onClick={() => setModalImage(null)}
+                className="w-8 h-8 rounded-full flex items-center justify-center text-[#808080] hover:bg-[#f5f5f5] transition-colors duration-200"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <div className="overflow-y-auto flex-1">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={modalImage.src}
+                alt={modalImage.title}
+                style={{ width: '100%', display: 'block' }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }

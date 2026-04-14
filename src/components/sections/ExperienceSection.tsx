@@ -10,7 +10,7 @@ const experiences = [
   },
   {
     icon: Compass,
-    titleLine1: '就活の進め方が、',
+    titleLine1: '就活の進め方に、',
     titleLine2: '迷わなくなる。',
     description:
       '自分の強みや価値観が言語化されることで、企業選びや志望動機に一本の軸ができる。軸があるから、次に何をすべきかが自然と見えてくる。',
