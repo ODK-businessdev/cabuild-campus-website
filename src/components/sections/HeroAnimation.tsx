@@ -82,17 +82,17 @@ export default function HeroAnimation() {
         @keyframes ha-blink { 0%,100%{opacity:1} 50%{opacity:0} }
       `}</style>
 
-      <div style={{ background: '#f5f5f7', borderRadius: '16px', padding: '20px', width: '100%', maxWidth: '520px', margin: '0 auto' }}>
+      <div style={{ background: '#f5f5f7', borderRadius: '16px', padding: '16px', width: '100%', maxWidth: '520px', margin: '0 auto' }}>
         <div style={{ background: '#fff', borderRadius: '12px', border: '0.5px solid #e0e0e0', overflow: 'hidden' }}>
 
           {/* ヘッダー */}
-          <div style={{ padding: '14px 16px 10px', borderBottom: '0.5px solid #eee' }}>
-            <p style={{ fontSize: '15px', fontWeight: 500, color: '#1a1a1a', margin: 0 }}>自己分析 — 大学時代</p>
-            <p style={{ fontSize: '12px', color: '#888', margin: '2px 0 0' }}>Situation（状況）</p>
+          <div style={{ padding: '12px 14px 8px', borderBottom: '0.5px solid #eee' }}>
+            <p style={{ fontSize: '14px', fontWeight: 500, color: '#1a1a1a', margin: 0 }}>自己分析 — 大学時代</p>
+            <p style={{ fontSize: '11px', color: '#888', margin: '2px 0 0' }}>Situation（状況）</p>
           </div>
 
           {/* チャット本体 */}
-          <div style={{ padding: '16px', minHeight: '380px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div style={{ padding: '12px', minHeight: '280px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
 
             <div ref={setRef('m1')} className="ha-row">
               <AiIcon />

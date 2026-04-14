@@ -54,25 +54,60 @@ Footer
 
 ---
 
-## 5. セクション別 詳細仕様
+## 5. モバイル対応方針
+
+**対象デバイス**: iPhone SE（375px）/ iPhone 14・15（390px）を基準とした `< 768px` 全般
+
+### 基本方針
+- モバイルファースト設計（Tailwind のデフォルトがモバイル、`md:` でPC上書き）
+- タップターゲットは最低 `h-10`（40px）確保
+- 横スクロールは許容しない（コンテンツは縦積みまたは横スクロール領域を明示）
+- フォントサイズ・余白は PC の 70〜80% 程度を目安に調整
+
+### セクション別モバイル仕様
+
+| セクション | モバイル時の主な変更点 |
+|---|---|
+| Header | ハンバーガーメニュー（`md:hidden`）。ロゴ横の「キャンパス」テキストは `hidden sm:inline` で非表示 |
+| HeroSection | H1: `2.6rem`（PC: `6.075rem`）/ 左カラム上padding: `pt-8`（PC: `pt-[70px]`）/ gap: `gap-8`（PC: `gap-[54px]`）/ アニメーション縦積み |
+| ExperienceSection | カード: `grid-cols-1`（タブレット: `sm:grid-cols-2`、PC: `lg:grid-cols-4`） |
+| FeaturesSection | 機能選択: 横スクロールピルタブ（ブルー背景アクティブ）。縦リストは `hidden md:flex`。画像プレビュー高さ `h-[220px]`（PC: `md:h-[480px]`）。詳細パネル padding `p-5`（PC: `md:p-8`）。タイトル `text-xl`（PC: `md:text-2xl`）。CTA: モバイルで縦積み・全幅（`sm:` で横並び） |
+| HowToSection | タブ: `grid-cols-2`（1年・2年が上段、3年・4年が下段）。PC（`md:`）で横並び。カード: `grid-cols-1`（`sm:` で2列） |
+| TestimonialsSection | カルーセル: 変更なし（1枚表示が元々モバイル対応済み） |
+| FaqSection | アコーディオン: 変更なし（元々レスポンシブ対応済み） |
+| ContactSection | フォーム: 変更なし（`max-w-2xl` で元々対応済み） |
+| Footer | `flex-col sm:flex-row` で縦積み→横並び |
+
+### HeroAnimation モバイル調整
+
+| 項目 | モバイル | PC |
+|---|---|---|
+| チャットエリア padding | `12px` | `16px` |
+| チャットエリア minHeight | `280px` | `380px` |
+| ヘッダーフォントサイズ | `14px` | `15px` |
 
 ---
 
-### 5-1. Header
+## 6. セクション別 詳細仕様
 
-- **ロゴ**: `public/logo.png` ＋「キャンパス」テキスト（グレー）
+---
+
+### 6-1. Header
+
+- **ロゴ**: `public/logo.png`（h-7）＋「キャンパス」テキスト（グレー・`hidden sm:inline`）
+- **ファビコン**: `src/app/icon.png`（CABUILDロゴ・水色丸形）
 - **ナビリンク**: CABUILDキャンパスとは / 機能 / 使い方 / よくある質問
-- **CTAボタン**: 「無料ではじめる」→ `https://campus.cabuild.jp/`
-- **モバイル**: ハンバーガーメニュー
-- **表示**: `sticky top-0`・白背景・下ボーダー
+- **CTAボタン**: 「無料ではじめる」→ `https://campus.cabuild.jp/`（デスクトップのみ）
+- **モバイル**: ハンバーガーメニュー（`Menu` / `X` アイコン）・タップで展開、ナビ＋CTAを縦表示
+- **表示**: `sticky top-0`・白背景・下ボーダー（`border-gray-200`）
 
 ---
 
-### 5-2. FV（HeroSection）
+### 6-2. FV（HeroSection）
 
 #### レイアウト
-- 左右2カラム（PC: `md:grid-cols-2`）/ 縦並び（SP）
-- 左カラム: `flex flex-col gap-[54px] pt-[70px]`
+- 左右2カラム（PC: `md:grid-cols-2`）/ 縦積み（SP）
+- 左カラム: `flex flex-col gap-8 md:gap-[54px] pt-8 md:pt-[70px]`
 - 右カラム: HeroAnimation コンポーネント
 
 #### キャッチコピー
@@ -80,7 +115,7 @@ Footer
 就活は、
 出会いだ。
 ```
-- フォントサイズ: `4.05rem`（SP）/ `6.075rem`（PC）
+- フォントサイズ: `2.6rem`（SP）/ `6.075rem`（PC）
 - すべて通常テキスト（Zen Kaku Gothic New）・`#1a1a1a`
 - 手書き画像・アンダーバー画像は使用しない
 
@@ -94,9 +129,9 @@ AIが、あなたの言葉にならなかった強みや価値観を引き出し
 #### CTAボタン
 - 「無料ではじめる」（ブルー `#299dd9`）→ `https://campus.cabuild.jp/`
 - 「機能を見る」（アウトライン）→ `#features` へスクロール
-- 信頼テキストは削除済み
+- `flex-col sm:flex-row` で縦積み→横並び
 
-#### 右カラム: FVアニメーション（HeroAnimation / v7）
+#### 右カラム: FVアニメーション（HeroAnimation）
 - 自己分析AIのチャット画面を模したアニメーション
 - AIと学生の会話が順番に表示され、ループ再生
 - カラー: AIアイコン・送信ボタン `#2BBFA8`
@@ -110,13 +145,12 @@ AIが、あなたの言葉にならなかった強みや価値観を引き出し
 
 ---
 
-### 5-3. 体験セクション（ExperienceSection）
+### 6-3. 体験セクション（ExperienceSection）
 
 - **見出し**: 「こんな体験ができます」
 - **サブコピー**: 「就活に必要な準備ツールがすべて揃っているから、迷わず集中して取り組める。」
 - **背景**: `#edf7fd`
-- **レイアウト**: 4枚カード（PC: 4列 / タブレット: 2列 / SP: 1列）
-- **タイトルフォントサイズ**: `text-xl`（20px）
+- **レイアウト**: 4枚カード（PC: `lg:grid-cols-4` / タブレット: `sm:grid-cols-2` / SP: `grid-cols-1`）
 - **タイトルのアンダーバー**: 背景グラデーション方式（`rgba(41,157,217,0.6)`・4px・文字の92%位置）
 
 | # | タイトル1行目 | タイトル2行目 | 説明文 |
@@ -128,63 +162,80 @@ AIが、あなたの言葉にならなかった強みや価値観を引き出し
 
 ---
 
-### 5-4. 機能セクション（FeaturesSection）
+### 6-4. 機能セクション（FeaturesSection）
 
 - **見出し**: 「具体的に何ができるか」
 - **サブコピー**: 「自己分析から企業研究・ES添削まで、就活準備に必要なツールが一つに。」
 - **背景**: 白
-- **レイアウト**: 左280px固定リスト ＋ 右詳細パネル（クリックで切り替え）
-- **右パネル構成**:
-  1. アイコン（`w-12 h-12`）＋ タイトル（`text-2xl`）＋ CTAボタン（右端）
-  2. 詳細テキスト
-  3. 「できること」バッジ ＋ 箇条書き
-  4. 画面プレビュー（高さ480px ＋ 下部グラデーション ＋ 「レポートのサンプルを見る」CTA）
-- **モーダル**: 画面サンプル画像をスクロールで全体閲覧可能（`×`ボタンまたはオーバーレイクリックで閉じる）
-- **CTAリンク**: `https://campus.cabuild.jp/`
+- **section padding**: `py-16 md:py-24 px-6`
+
+#### レイアウト
+
+**PC（`md:` 以上）**
+- 左280px固定リスト ＋ 右詳細パネル（クリックで切り替え）
+- 左リスト: アイコン（`w-9 h-9`）＋機能名 / アクティブ時: `#edf7fd` 背景・`#b8dff4` ボーダー
+
+**モバイル（`< md`）**
+- 横スクロールのピル型タブ（左リストは `hidden md:flex` で非表示）
+- タブ: アイコン（14px）＋機能名・アクティブ時ブルー背景・白文字
+- `overflow-x-auto -mx-6 px-6` で画面端まで伸ばし、スクロール可能
+
+#### 詳細パネル構成
+
+| 要素 | PC | モバイル |
+|---|---|---|
+| padding | `p-8` | `p-5` |
+| ヘッダー配置 | アイコン＋タイトル 左寄せ、CTA 右端（横並び） | アイコン＋タイトル、CTAは下に全幅（縦積み） |
+| タイトルサイズ | `text-2xl` | `text-xl` |
+| 画像プレビュー高さ | `480px` | `220px` |
+| グラデーション高さ | `180px` | `90px` |
+| プレビューCTAボタン | `h-10 px-5 text-sm` | `h-8 px-3 text-xs` |
 
 #### 機能一覧（index順）
 
-**0: 12キャリアタイプ診断**
+**0: キャリアタイプ診断**（アイコン: `Brain`）
 - サブタイトル: あなたが気づいていない特性も、言葉にする。
-- 詳細: BIG5・職業志向・価値観をもとに分類。面接でそのまま活用できるレポートを提供。
 - できること: 12タイプへの分類 / 強み・弱み・向いている職種の可視化 / 面接活用アドバイス付きレポートの提供
-- CTA: 「診断してみる」
-- プレビュー画像: `public/career-type-assessment-v2.png`（アセスメント結果画面）
-- モーダル画像: `public/career-type-report-v2.png`（詳細レポート）
+- CTA: 「診断してみる」→ `https://campus.cabuild.jp/`
+- プレビュー画像: `public/career-type-assessment-v2.png`
+- モーダル画像: `public/career-type-report-v2.png`
 
-**1: 自己分析AI**
+**1: 自己分析**（アイコン: `Lightbulb`）
 - サブタイトル: あなたの経験を掘り下げ、就活の軸をつくる。
-- 詳細: STAR法をもとに経験を深掘りし、強みや価値観を引き出す。答えを教えるのではなく納得できる軸をつくる。
 - できること: 6ステップによる積み上げ設計 / STAR法をベースにした経験の深掘り / Will-Can-Mustの整理 / 志望動機への連携
 - CTA: 「分析してみる」
-- プレビュー画像: `public/self-analysis-sample.png`（自己分析完了画面）
+- プレビュー画像: `public/self-analysis-sample.png`
 - モーダル画像: `public/self-analysis-sample.png`
 
-**2: 企業研究AI**
+**2: 企業研究**（アイコン: `Building2`）
 - サブタイトル: あなたがまだ知らない、相性の良い企業を見つける。
-- 詳細: キーワードで企業を検索し、概要・事業・強み・弱み・企業文化・財務・最新取り組みを提供。
 - できること: 企業概要・事業内容・強み・弱みの整理 / 企業文化・財務情報・最新取り組みの提供 / 志望動機ワークスペースとの連動
 - CTA: 「企業を調べてみる」
 - プレビュー画像: `public/company-research-sample.png`
 - モーダル画像: `public/company-research-sample.png`
 
-**3: ES添削AI**
+**3: ES添削**（アイコン: `Pencil`）
 - サブタイトル: あなたの魅力を伝えるESを、明確な基準で改善する。
-- 詳細: 論理性・具体性・適切性・表現力の4観点で評価し、採用担当者に伝わるESへ改善。
 - できること: 4観点（論理性・具体性・適切性・表現力）での評価 / 結論ファースト構造の確認 / 数値・事実の有無チェック / 設問への適切性の確認 / 読みやすさ・冗長性の改善
 - CTA: 「ESを添削してみる」
 - プレビュー画像: `public/es-correction-sample.png`
 - モーダル画像: `public/es-correction-sample.png`
 
-**4: 面接練習AI**（Coming Soon）
+**4: 面接練習**（アイコン: `MessageCircle`）（Coming Soon）
 - サブタイトル: 本番さながらの練習で、自信をつける。
 - 詳細: 2026年夏頃リリース予定。
 - CTAなし・Coming Soonバッジ（グリーン `#8fc23f`）表示
 - プレビューなし
 
+#### モーダル仕様
+- 画面サンプル画像をスクロールで全体閲覧可能
+- `×` ボタンまたはオーバーレイクリックで閉じる
+- 最大幅: `720px`・最大高: `88vh`
+- ヘッダー padding: `px-4 py-3 md:px-6 md:py-4`・タイトル: `text-xs md:text-sm`
+
 ---
 
-### 5-5. 使い方・流れ（HowToSection）
+### 6-5. 使い方・流れ（HowToSection）
 
 - **見出し**: 「使い方・流れ」
 - **サブコピー**: 「あなたの学年を選んでください」
@@ -192,9 +243,13 @@ AIが、あなたの言葉にならなかった強みや価値観を引き出し
 - **UI**: 学年別タブ（大学1〜4年生）・`Client Component`
 
 #### タブ
-- ピル型ボタン（`rounded-full`）
-- アクティブ: 白背景・ブルー文字・`font-weight: 600`・白ボーダー
-- 非アクティブ: 透明背景・白文字・`font-weight: 500`・半透明白ボーダー
+
+| | モバイル（`< md`） | PC（`md:` 以上） |
+|---|---|---|
+| レイアウト | `grid-cols-2`（1・2年上段、3・4年下段） | `flex flex-wrap` 横並び |
+| ボタンサイズ | `px-4 py-2.5` | `px-5 py-2` |
+| アクティブ | 白背景・ブルー文字・`font-weight: 600`・白ボーダー | 同左 |
+| 非アクティブ | 透明背景・白文字・`font-weight: 500`・半透明白ボーダー | 同左 |
 
 #### パネル構造（各学年共通）
 
@@ -207,7 +262,7 @@ YEAR X（text-sm・白・bold）       補足メモ（text-sm・白・medium）
 
 ─────────────────────────────────────────────────
 [ FIRST STEP カード ]  [ SECOND STEP / 活用シーン カード ]
-（白背景・rounded-xl・2カラム SP時縦並び）
+（白背景・rounded-xl・2カラム。SP: grid-cols-1）
 ```
 
 #### フェーズタグカラー
@@ -249,7 +304,7 @@ YEAR X（text-sm・白・bold）       補足メモ（text-sm・白・medium）
 
 ---
 
-### 5-6. ユーザーの声（TestimonialsSection）
+### 6-6. ユーザーの声（TestimonialsSection）
 
 - **見出し**: 「ユーザーの声」
 - **サブコピー**: 「実際に利用した学生にインタビューを実施しました。」
@@ -270,17 +325,17 @@ YEAR X（text-sm・白・bold）       補足メモ（text-sm・白・medium）
 
 ---
 
-### 5-7. FAQ（FaqSection）
+### 6-7. FAQ（FaqSection）
 
 - **見出し**: 「よくある質問」
 - **サブコピー**: 「不安や疑問を解消します。」
 - **背景**: `#fafafa`
 - **UI**: アコーディオン（shadcn/ui）・9件
 
-| # | 質問 | 回答 |
+| # | 質問 | 回答概要 |
 |---|---|---|
-| 1 | 利用料金はかかりますか？ | 完全無料でご利用いただけます。 |
-| 2 | スマホでも使えますか？ | 使えます。ただしES添削や面接練習はPCを推奨。 |
+| 1 | 利用料金はかかりますか？ | 完全無料 |
+| 2 | スマホでも使えますか？ | 使えます。ES添削・面接練習はPCを推奨。 |
 | 3 | どのくらいの時間がかかりますか？ | 人やタイミングによって異なります。明確なゴールは設けておらず、必要なときに適宜使える設計。保存機能あり。 |
 | 4 | 他の就活サービスと何が違いますか？ | 就活準備ツールを一括利用できる。AIが一つの正解ではなく利用者自身が納得できる言葉に導く設計。 |
 | 5 | 面接練習AIはいつから使えますか？ | 2026年夏頃リリース予定。 |
@@ -291,7 +346,7 @@ YEAR X（text-sm・白・bold）       補足メモ（text-sm・白・medium）
 
 ---
 
-### 5-8. お問い合わせ（ContactSection）
+### 6-8. お問い合わせ（ContactSection）
 
 - **見出し**: 「お問い合わせ」
 - **サブコピー**: 「ご質問やご要望はこちらからどうぞ。」
@@ -319,26 +374,27 @@ YEAR X（text-sm・白・bold）       補足メモ（text-sm・白・medium）
 
 ---
 
-### 5-9. Footer
+### 6-9. Footer
 
-- **ロゴ**: `public/logo.png` ＋「キャンパス」テキスト
+- **ロゴ**: `public/logo.png`（h-6）＋「キャンパス」テキスト
 - **運営**: 株式会社ポトス（ODKソリューションズグループ）
 - **リンク**: プライバシーポリシー（`/privacy`）/ お問い合わせ（`#contact`）
 - **コピーライト**: © 2026 株式会社ポトス. All rights reserved.
+- **レイアウト**: `flex-col sm:flex-row`（SP縦積み・PC横並び）
 
 ---
 
-## 6. 使用アセット一覧
+## 7. 使用アセット一覧
 
 | ファイルパス | 用途 | 元画像 |
 |---|---|---|
 | `public/logo.png` | ヘッダー・フッターロゴ | — |
-| `public/career-type-assessment-v2.png` | 12キャリアタイプ診断 インラインプレビュー | `docs/image/12キャリアタイプ結果画面（アセスメント）.png` |
-| `public/career-type-report-v2.png` | 12キャリアタイプ診断 モーダル（詳細レポート） | `docs/image/12キャリアタイプ結果画面.png` |
-| `public/self-analysis-sample.png` | 自己分析AI プレビュー・モーダル | `docs/image/自己分析の完了画面.png` |
-| `public/company-research-sample.png` | 企業研究AI プレビュー・モーダル | `docs/image/企業研究画面.png` |
-| `public/es-correction-sample.png` | ES添削AI プレビュー・モーダル | `docs/image/ES添削.png` |
-| `docs/cabuild_hero_animation_v7.html` | FVアニメーション元ファイル（v7） | — |
+| `src/app/icon.png` | ファビコン（Next.js App Router 自動認識） | `docs/image/CABUILDロゴ（ファビコン）.png` |
+| `public/career-type-assessment-v2.png` | キャリアタイプ診断 インラインプレビュー | `docs/image/12キャリアタイプ結果画面（アセスメント）.png` |
+| `public/career-type-report-v2.png` | キャリアタイプ診断 モーダル（詳細レポート） | `docs/image/12キャリアタイプ結果画面.png` |
+| `public/self-analysis-sample.png` | 自己分析 プレビュー・モーダル | `docs/image/自己分析の完了画面.png` |
+| `public/company-research-sample.png` | 企業研究 プレビュー・モーダル | `docs/image/企業研究画面.png` |
+| `public/es-correction-sample.png` | ES添削 プレビュー・モーダル | `docs/image/ES添削.png` |
 
 #### 画像処理仕様（共通）
 - 処理ツール: Pillow（Python）
@@ -348,19 +404,19 @@ YEAR X（text-sm・白・bold）       補足メモ（text-sm・白・medium）
 
 ---
 
-## 7. 残タスク
+## 8. 残タスク
 
 | 優先度 | 内容 |
 |---|---|
 | 🔴 | お問い合わせフォームのAPI連携（Resend等） |
 | 🟡 | OGP画像（`public/og-image.png`）の本番用デザイン作成 |
-| 🟡 | モバイル対応の最終確認・調整 |
+| 🟡 | モバイル表示の実機確認（iPhone SE 375px・iPhone 14 390px） |
 | 🟢 | MicroCMS連携（ユーザーの声・FAQ等の動的取得） |
 | 🟢 | `<img>` → `next/image` への移行（パフォーマンス最適化） |
 
 ---
 
-## 8. 技術スタック
+## 9. 技術スタック
 
 | カテゴリ | 技術 |
 |---|---|
@@ -375,20 +431,21 @@ YEAR X（text-sm・白・bold）       補足メモ（text-sm・白・medium）
 
 ---
 
-## 9. コンポーネント一覧
+## 10. コンポーネント一覧
 
 | ファイル | 種別 | 概要 |
 |---|---|---|
-| `src/app/layout.tsx` | Server | ルートレイアウト・フォント・OGP設定 |
+| `src/app/layout.tsx` | Server | ルートレイアウト・フォント・OGP設定・ファビコン（`icon.png`） |
+| `src/app/icon.png` | Asset | ファビコン（Next.js App Router 自動認識） |
 | `src/app/page.tsx` | Server | トップページ（各セクション呼び出し） |
 | `src/app/privacy/page.tsx` | Server | プライバシーポリシー |
 | `src/components/layout/Header.tsx` | Client | sticky ヘッダー・ハンバーガーメニュー |
 | `src/components/layout/Footer.tsx` | Server | フッター |
-| `src/components/sections/HeroSection.tsx` | Server | FV |
-| `src/components/sections/HeroAnimation.tsx` | Client | FVチャットアニメーション（v7） |
-| `src/components/sections/ExperienceSection.tsx` | Server | 体験セクション |
-| `src/components/sections/FeaturesSection.tsx` | Client | 機能セクション（タブ切り替え・モーダル） |
-| `src/components/sections/HowToSection.tsx` | Client | 使い方・流れ（学年別タブ） |
-| `src/components/sections/TestimonialsSection.tsx` | Client | ユーザーの声（カルーセル） |
-| `src/components/sections/FaqSection.tsx` | Client | FAQ（アコーディオン） |
+| `src/components/sections/HeroSection.tsx` | Server | FV（モバイル: H1縮小・gap調整） |
+| `src/components/sections/HeroAnimation.tsx` | Client | FVチャットアニメーション（モバイル: minHeight・padding縮小） |
+| `src/components/sections/ExperienceSection.tsx` | Server | 体験セクション（レスポンシブグリッド） |
+| `src/components/sections/FeaturesSection.tsx` | Client | 機能セクション（SP: 横スクロールピルタブ、PC: 縦リスト）・モーダル |
+| `src/components/sections/HowToSection.tsx` | Client | 使い方・流れ（SP: 2×2グリッドタブ、PC: 横並び） |
+| `src/components/sections/TestimonialsSection.tsx` | Client | ユーザーの声（カルーセル・5件） |
+| `src/components/sections/FaqSection.tsx` | Server | FAQ（アコーディオン・9件） |
 | `src/components/sections/ContactSection.tsx` | Client | お問い合わせ（フォーム） |

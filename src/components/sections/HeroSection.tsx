@@ -7,10 +7,10 @@ export default function HeroSection() {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch">
           {/* 左カラム: テキスト */}
-          <div className="flex flex-col gap-[54px] pt-[70px]">
+          <div className="flex flex-col gap-8 md:gap-[54px] pt-8 md:pt-[70px]">
             {/* キャッチコピー */}
             <h1
-              className="text-[4.05rem] md:text-[6.075rem] font-bold text-[#1a1a1a] leading-tight"
+              className="text-[2.6rem] md:text-[6.075rem] font-bold text-[#1a1a1a] leading-tight"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
               就活は、

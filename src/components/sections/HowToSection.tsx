@@ -183,7 +183,7 @@ export default function HowToSection() {
         </div>
 
         {/* タブボタン */}
-        <div className="flex flex-wrap gap-2 justify-center mb-8" role="tablist">
+        <div className="grid grid-cols-2 md:flex md:flex-wrap gap-2 justify-center mb-8" role="tablist">
           {grades.map((grade) => {
             const isActive = selectedGrade === grade
             return (
@@ -192,7 +192,7 @@ export default function HowToSection() {
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => setSelectedGrade(grade)}
-                className="px-5 py-2 rounded-full text-sm transition-all duration-200"
+                className="px-4 py-2.5 sm:px-5 sm:py-2 rounded-full text-sm transition-all duration-200"
                 style={{
                   backgroundColor: isActive ? '#ffffff' : 'transparent',
                   color: isActive ? '#299dd9' : '#ffffff',
