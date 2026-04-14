@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 import { Brain, Search, Building2, PenLine, Mic, ArrowRight, X } from 'lucide-react'
 
 type Feature = {
@@ -205,12 +204,11 @@ export default function FeaturesSection() {
             {/* 画面プレビュー（12キャリアタイプ診断） */}
             {selectedIndex === 0 && (
               <div className="mt-2 relative rounded-xl overflow-hidden border border-[#e5e5e5]" style={{ height: '480px' }}>
-                <Image
-                  src="/career-type-assessment-v2.png"
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/campus/career-type-assessment-v2.png"
                   alt="12キャリアタイプ診断 アセスメント結果"
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  style={{ width: '100%', display: 'block' }}
                 />
                 <div
                   className="absolute inset-x-0 bottom-0"
@@ -221,7 +219,7 @@ export default function FeaturesSection() {
                 />
                 <div className="absolute bottom-4 right-4">
                   <button
-                    onClick={() => setModalImage({ src: '/career-type-report-v2.png', title: '12キャリアタイプ診断 レポートサンプル' })}
+                    onClick={() => setModalImage({ src: '/campus/career-type-report-v2.png', title: '12キャリアタイプ診断 レポートサンプル' })}
                     className="inline-flex items-center gap-2 h-10 px-5 rounded text-sm font-medium transition-colors duration-200 shadow-sm"
                     style={{ color: '#299dd9', backgroundColor: '#ffffff', border: '1px solid #299dd9' }}
                   >
@@ -235,12 +233,11 @@ export default function FeaturesSection() {
             {/* 画面プレビュー（企業研究AI） */}
             {selectedIndex === 2 && (
               <div className="mt-2 relative rounded-xl overflow-hidden border border-[#e5e5e5]" style={{ height: '480px' }}>
-                <Image
-                  src="/company-research-sample.png"
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/campus/company-research-sample.png"
                   alt="企業研究AI 画面サンプル"
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  style={{ width: '100%', display: 'block' }}
                 />
                 <div
                   className="absolute inset-x-0 bottom-0"
@@ -251,7 +248,7 @@ export default function FeaturesSection() {
                 />
                 <div className="absolute bottom-4 right-4">
                   <button
-                    onClick={() => setModalImage({ src: '/company-research-sample.png', title: '企業研究AI 画面サンプル' })}
+                    onClick={() => setModalImage({ src: '/campus/company-research-sample.png', title: '企業研究AI 画面サンプル' })}
                     className="inline-flex items-center gap-2 h-10 px-5 rounded text-sm font-medium transition-colors duration-200 shadow-sm"
                     style={{ color: '#299dd9', backgroundColor: '#ffffff', border: '1px solid #299dd9' }}
                   >
@@ -265,12 +262,11 @@ export default function FeaturesSection() {
             {/* 画面プレビュー（ES添削AI） */}
             {selectedIndex === 3 && (
               <div className="mt-2 relative rounded-xl overflow-hidden border border-[#e5e5e5]" style={{ height: '480px' }}>
-                <Image
-                  src="/es-correction-sample.png"
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/campus/es-correction-sample.png"
                   alt="ES添削AI 画面サンプル"
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  style={{ width: '100%', display: 'block' }}
                 />
                 <div
                   className="absolute inset-x-0 bottom-0"
@@ -281,7 +277,7 @@ export default function FeaturesSection() {
                 />
                 <div className="absolute bottom-4 right-4">
                   <button
-                    onClick={() => setModalImage({ src: '/es-correction-sample.png', title: 'ES添削AI 画面サンプル' })}
+                    onClick={() => setModalImage({ src: '/campus/es-correction-sample.png', title: 'ES添削AI 画面サンプル' })}
                     className="inline-flex items-center gap-2 h-10 px-5 rounded text-sm font-medium transition-colors duration-200 shadow-sm"
                     style={{ color: '#299dd9', backgroundColor: '#ffffff', border: '1px solid #299dd9' }}
                   >
@@ -295,12 +291,11 @@ export default function FeaturesSection() {
             {/* 画面プレビュー（自己分析AI） */}
             {selectedIndex === 1 && (
               <div className="mt-2 relative rounded-xl overflow-hidden border border-[#e5e5e5]" style={{ height: '480px' }}>
-                <Image
-                  src="/self-analysis-sample.png"
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/campus/self-analysis-sample.png"
                   alt="自己分析AI 完了画面"
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  style={{ width: '100%', display: 'block' }}
                 />
                 <div
                   className="absolute inset-x-0 bottom-0"
@@ -311,7 +306,7 @@ export default function FeaturesSection() {
                 />
                 <div className="absolute bottom-4 right-4">
                   <button
-                    onClick={() => setModalImage({ src: '/self-analysis-sample.png', title: '自己分析AI 完了画面サンプル' })}
+                    onClick={() => setModalImage({ src: '/campus/self-analysis-sample.png', title: '自己分析AI 完了画面サンプル' })}
                     className="inline-flex items-center gap-2 h-10 px-5 rounded text-sm font-medium transition-colors duration-200 shadow-sm"
                     style={{ color: '#299dd9', backgroundColor: '#ffffff', border: '1px solid #299dd9' }}
                   >
@@ -349,12 +344,11 @@ export default function FeaturesSection() {
               </button>
             </div>
             <div className="overflow-y-auto flex-1">
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={modalImage.src}
                 alt={modalImage.title}
-                width={1200}
-                height={900}
-                style={{ width: '100%', height: 'auto', display: 'block' }}
+                style={{ width: '100%', display: 'block' }}
               />
             </div>
           </div>

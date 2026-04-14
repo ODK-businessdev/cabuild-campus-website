@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 const footerLinks = [
   { label: 'プライバシーポリシー', href: '/privacy' },
   { label: 'お問い合わせ', href: '#contact' },
@@ -12,11 +10,10 @@ export default function Footer() {
         {/* ロゴ */}
         <div className="flex flex-col items-center sm:items-start gap-3">
           <div className="flex items-center gap-2">
-            <Image
-              src="/logo.png"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/campus/logo.png"
               alt="CABUILD"
-              width={90}
-              height={24}
               className="h-6 object-contain"
             />
             <span className="text-sm font-medium text-gray-500">キャンパス</span>
