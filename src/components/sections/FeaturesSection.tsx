@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { Brain, Search, Building2, PenLine, Mic, ArrowRight, X } from 'lucide-react'
 
 type Feature = {
@@ -204,11 +205,12 @@ export default function FeaturesSection() {
             {/* 画面プレビュー（12キャリアタイプ診断） */}
             {selectedIndex === 0 && (
               <div className="mt-2 relative rounded-xl overflow-hidden border border-[#e5e5e5]" style={{ height: '480px' }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src="/career-type-assessment-v2.png"
                   alt="12キャリアタイプ診断 アセスメント結果"
-                  style={{ width: '100%', display: 'block' }}
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div
                   className="absolute inset-x-0 bottom-0"
@@ -233,11 +235,12 @@ export default function FeaturesSection() {
             {/* 画面プレビュー（企業研究AI） */}
             {selectedIndex === 2 && (
               <div className="mt-2 relative rounded-xl overflow-hidden border border-[#e5e5e5]" style={{ height: '480px' }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src="/company-research-sample.png"
                   alt="企業研究AI 画面サンプル"
-                  style={{ width: '100%', display: 'block' }}
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div
                   className="absolute inset-x-0 bottom-0"
@@ -262,11 +265,12 @@ export default function FeaturesSection() {
             {/* 画面プレビュー（ES添削AI） */}
             {selectedIndex === 3 && (
               <div className="mt-2 relative rounded-xl overflow-hidden border border-[#e5e5e5]" style={{ height: '480px' }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src="/es-correction-sample.png"
                   alt="ES添削AI 画面サンプル"
-                  style={{ width: '100%', display: 'block' }}
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div
                   className="absolute inset-x-0 bottom-0"
@@ -291,11 +295,12 @@ export default function FeaturesSection() {
             {/* 画面プレビュー（自己分析AI） */}
             {selectedIndex === 1 && (
               <div className="mt-2 relative rounded-xl overflow-hidden border border-[#e5e5e5]" style={{ height: '480px' }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src="/self-analysis-sample.png"
                   alt="自己分析AI 完了画面"
-                  style={{ width: '100%', display: 'block' }}
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div
                   className="absolute inset-x-0 bottom-0"
@@ -344,11 +349,12 @@ export default function FeaturesSection() {
               </button>
             </div>
             <div className="overflow-y-auto flex-1">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={modalImage.src}
                 alt={modalImage.title}
-                style={{ width: '100%', display: 'block' }}
+                width={1200}
+                height={900}
+                style={{ width: '100%', height: 'auto', display: 'block' }}
               />
             </div>
           </div>
