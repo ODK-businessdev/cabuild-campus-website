@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
+import Script from 'next/script'
 
 const faqs = [
   {
@@ -51,6 +52,19 @@ const faqs = [
   },
 ]
 
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+}
+
 export default function FaqSection() {
   return (
     <section id="faq" className="bg-[#fafafa] py-24 px-6">
@@ -68,6 +82,11 @@ export default function FaqSection() {
           </p>
         </div>
 
+        <Script
+          id="faq-jsonld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
         <Accordion className="flex flex-col gap-2">
           {faqs.map((faq, index) => (
             <AccordionItem
