@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
-  { label: 'CABUILDキャンパスとは', href: '#about' },
-  { label: '機能', href: '#features' },
-  { label: '使い方', href: '#howto' },
-  { label: 'よくある質問', href: '#faq' },
+  { label: 'CABUILDキャンパスとは', href: 'https://cabuild.jp/campus#experience' },
+  { label: '機能', href: 'https://cabuild.jp/campus#features' },
+  { label: '使い方', href: 'https://cabuild.jp/campus#howto' },
+  { label: 'よくある質問', href: 'https://cabuild.jp/campus#faq' },
 ]
 
 export default function Header() {
@@ -18,7 +18,8 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 shrink-0">
-          <span className="text-lg font-bold text-[#299dd9]">CABUILD</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/cabuild-logo.png" alt="CABUILD" className="h-7 object-contain" />
           <span className="text-sm font-medium text-gray-500">キャンパス</span>
         </Link>
 
@@ -38,7 +39,8 @@ export default function Header() {
           href="https://campus.cabuild.jp/"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:inline-flex items-center justify-center h-9 px-5 rounded text-sm font-medium text-white bg-[#299dd9] hover:bg-[#2490cc] transition-colors duration-200"
+          className="hidden md:inline-flex items-center justify-center h-9 px-5 rounded text-sm font-bold transition-opacity duration-200 hover:opacity-90"
+          style={{ backgroundColor: '#EFBB3F', color: '#3A455C' }}
         >
           無料ではじめる
         </a>
@@ -68,7 +70,8 @@ export default function Header() {
             href="https://campus.cabuild.jp/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center h-10 px-5 rounded text-sm font-medium text-white bg-[#299dd9] hover:bg-[#2490cc] transition-colors duration-200"
+            className="inline-flex items-center justify-center h-10 px-5 rounded text-sm font-bold transition-opacity duration-200 hover:opacity-90"
+            style={{ backgroundColor: '#EFBB3F', color: '#3A455C' }}
             onClick={() => setMenuOpen(false)}
           >
             無料ではじめる
