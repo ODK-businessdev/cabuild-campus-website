@@ -2,7 +2,7 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   basePath: '/campus/lp',
-  trailingSlash: true,
+  trailingSlash: false,
   images: {
     unoptimized: true,
   },
