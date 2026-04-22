@@ -18,7 +18,7 @@ const zenKakuGothicNew = Zen_Kaku_Gothic_New({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? 'https://campus.cabuild.jp'
+    process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cabuild.jp'
   ),
   title: 'CABUILDキャンパス | 就活は、出会いだ。',
   description:

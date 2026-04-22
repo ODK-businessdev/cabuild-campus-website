@@ -10,7 +10,7 @@ export default function Footer() {
         <div className="flex flex-col items-center sm:items-start gap-3">
           <div className="flex items-center gap-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/cabuild-logo.png" alt="CABUILD" className="h-6 object-contain" />
+            <img src="/campus/lp/cabuild-logo.png" alt="CABUILD" className="h-6 object-contain" />
             <span className="text-sm font-medium text-gray-500">キャンパス</span>
           </div>
           <p className="text-xs text-gray-500">

@@ -19,7 +19,7 @@ export default function Header() {
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 shrink-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/cabuild-logo.png" alt="CABUILD" className="h-7 object-contain" />
+          <img src="/campus/lp/cabuild-logo.png" alt="CABUILD" className="h-7 object-contain" />
           <span className="text-sm font-medium text-gray-500">キャンパス</span>
         </Link>
 
