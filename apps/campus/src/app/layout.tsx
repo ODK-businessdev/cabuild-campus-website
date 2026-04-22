@@ -24,10 +24,10 @@ const kleeOne = Klee_One({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? 'https://campus.cabuild.jp'
+    process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cabuild.jp'
   ),
   alternates: {
-    canonical: '/',
+    canonical: '/campus/',
   },
   title: 'CABUILDキャンパス | 就活は、出会いだ。',
   description:
