@@ -9,7 +9,8 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex flex-col items-center sm:items-start gap-3">
           <div className="flex items-center gap-2">
-            <span className="text-base font-bold text-[#299dd9]">CABUILD</span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/cabuild-logo.png" alt="CABUILD" className="h-6 object-contain" />
             <span className="text-sm font-medium text-gray-500">キャンパス</span>
           </div>
           <p className="text-xs text-gray-500">
