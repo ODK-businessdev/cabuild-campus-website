@@ -1,6 +1,0 @@
-{
-  "buildCommand": "npm run build:campus",
-  "outputDirectory": "apps/campus/.next",
-  "installCommand": "npm install",
-  "framework": "nextjs"
-}
