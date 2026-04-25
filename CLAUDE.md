@@ -32,6 +32,40 @@
 
 ---
 
+## 1.5. ドメイン・配信構成（重要）
+
+このリポジトリは **モノレポ構成** で、`apps/campus`（学生向けサイト）と `apps/lp`（LP）を持つ。`cabuild.jp` 自体は **別リポジトリ・別 Vercel プロジェクトの企業サイト** で、その `vercel.json` の rewrites で各サブパスを当リポジトリの Vercel プロジェクトに転送している。
+
+### 配信URLとリポジトリ・プロジェクトの対応
+
+| 公開URL | 配信元 Vercel プロジェクト | 当リポジトリ内のアプリ | basePath |
+|---|---|---|---|
+| `cabuild.jp/campus/*` | `cabuild-campus-website.vercel.app` | `apps/campus` | `/campus` |
+| `cabuild.jp/campus/lp/*` | `cabuild-campus-website-lp.vercel.app` | `apps/lp` | `/campus/lp` |
+| `cabuild.jp/*`（その他） | 企業サイト（別リポジトリ） | - | - |
+
+### 企業サイト側の rewrite 設定（参考・別リポジトリ）
+
+```json
+{
+  "rewrites": [
+    { "source": "/campus/lp/:path*", "destination": "https://cabuild-campus-website-lp.vercel.app/campus/lp/:path*" },
+    { "source": "/campus/:path*",    "destination": "https://cabuild-campus-website.vercel.app/campus/:path*" }
+  ]
+}
+```
+
+### 開発時の注意点
+
+- リダイレクト・404・CORS 等の問題が発生したら **「企業サイト → rewrite → campus/LP」の3層構造** で考える
+- `trailingSlash` の設定変更時は企業サイト側の挙動（trailing slash 除去）と衝突しないか注意（過去にループ事故あり）
+- 画像やAPI など deep path を扱うときは rewrite 経由でも到達できるか curl で必ず確認
+- `apps/campus` には `skipTrailingSlashRedirect: true` を設定済み（API ルートの 308 ループ回避のため）
+- 公開画像は `public/campus/...` または `public/campus/lp/...` 配下に配置（`/campus/xxx` の URL で配信されるため）
+- 企業サイトの `vercel.json` 編集は**別リポジトリでの作業**
+
+---
+
 ## 2. 開発の優先順位
 
 **最優先 (Must Have):**
