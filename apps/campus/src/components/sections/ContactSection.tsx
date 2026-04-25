@@ -21,14 +21,48 @@ const contactTypeOptions: { value: ContactType; label: string }[] = [
 const isStudentType = (type: ContactType) =>
   type === 'student_service' || type === 'student_account' || type === 'student_technical'
 
+const CONTACT_API = '/campus/api/contact'
+
 export default function ContactSection() {
   const [contactType, setContactType] = useState<ContactType>('')
+  const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
-  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // TODO: フェーズ3でAPI Route + Resend送信を実装
-    setSubmitted(true)
+    if (submitting) return
+
+    const formEl = e.currentTarget
+    const formData = new FormData(formEl)
+    const payload = {
+      name: String(formData.get('name') ?? ''),
+      email: String(formData.get('email') ?? ''),
+      contactType: String(formData.get('contactType') ?? ''),
+      university: String(formData.get('university') ?? ''),
+      grade: String(formData.get('grade') ?? ''),
+      message: String(formData.get('message') ?? ''),
+    }
+
+    setSubmitting(true)
+    setErrorMessage(null)
+
+    try {
+      const res = await fetch(CONTACT_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (!res.ok) {
+        const data = (await res.json().catch(() => null)) as { error?: string } | null
+        throw new Error(data?.error ?? '送信に失敗しました')
+      }
+      setSubmitted(true)
+    } catch (err) {
+      setErrorMessage(err instanceof Error ? err.message : '送信に失敗しました')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -59,7 +93,7 @@ export default function ContactSection() {
               送信しました
             </p>
             <p className="text-sm text-[#4a4a4a]">
-              内容を確認のうえ、担当者よりご連絡いたします。
+              ご入力いただいたメールアドレスに自動返信メールをお送りしました。担当者より順次ご連絡いたします。
             </p>
           </div>
         ) : (
@@ -72,6 +106,7 @@ export default function ContactSection() {
               </label>
               <input
                 type="text"
+                name="name"
                 required
                 placeholder="山田 太郎"
                 className="h-11 px-4 rounded border border-[#e5e5e5] text-sm text-[#1a1a1a] placeholder:text-[#808080] focus:outline-none focus:border-[#299dd9] transition-colors"
@@ -85,6 +120,7 @@ export default function ContactSection() {
               </label>
               <input
                 type="email"
+                name="email"
                 required
                 placeholder="example@email.com"
                 className="h-11 px-4 rounded border border-[#e5e5e5] text-sm text-[#1a1a1a] placeholder:text-[#808080] focus:outline-none focus:border-[#299dd9] transition-colors"
@@ -98,6 +134,7 @@ export default function ContactSection() {
               </label>
               <div className="relative">
                 <select
+                  name="contactType"
                   required
                   value={contactType}
                   onChange={(e) => setContactType(e.target.value as ContactType)}
@@ -131,6 +168,7 @@ export default function ContactSection() {
                   </label>
                   <input
                     type="text"
+                    name="university"
                     required
                     placeholder="〇〇大学"
                     className="h-11 px-4 rounded border border-[#e5e5e5] text-sm text-[#1a1a1a] placeholder:text-[#808080] focus:outline-none focus:border-[#299dd9] transition-colors"
@@ -142,7 +180,9 @@ export default function ContactSection() {
                   </label>
                   <div className="relative">
                     <select
+                      name="grade"
                       required
+                      defaultValue=""
                       className="w-full h-11 pl-4 pr-10 rounded border border-[#e5e5e5] text-sm text-[#1a1a1a] bg-white focus:outline-none focus:border-[#299dd9] transition-colors appearance-none"
                     >
                       <option value="" disabled>
@@ -172,6 +212,7 @@ export default function ContactSection() {
                 お問い合わせ内容 <span className="text-red-500">*</span>
               </label>
               <textarea
+                name="message"
                 required
                 rows={5}
                 placeholder="ご質問・ご要望をご記入ください"
@@ -179,12 +220,17 @@ export default function ContactSection() {
               />
             </div>
 
+            {errorMessage && (
+              <p className="text-sm text-red-600">{errorMessage}</p>
+            )}
+
             {/* 送信ボタン */}
             <button
               type="submit"
-              className="h-12 px-6 rounded text-sm font-medium text-white bg-[#4a4a4a] hover:bg-[#333333] transition-colors duration-200 mt-2"
+              disabled={submitting}
+              className="h-12 px-6 rounded text-sm font-medium text-white bg-[#4a4a4a] hover:bg-[#333333] transition-colors duration-200 mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              送信する
+              {submitting ? '送信中...' : '送信する'}
             </button>
           </form>
         )}
