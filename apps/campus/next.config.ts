@@ -25,7 +25,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   basePath: '/campus',
-  trailingSlash: false,
+  trailingSlash: true,
+  skipTrailingSlashRedirect: true,
   images: {
     unoptimized: true,
   },
