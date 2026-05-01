@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 type ContactType =
   | 'student_service'
@@ -24,9 +25,9 @@ const isStudentType = (type: ContactType) =>
 const CONTACT_API = '/campus/api/contact'
 
 export default function ContactSection() {
+  const router = useRouter()
   const [contactType, setContactType] = useState<ContactType>('')
   const [submitting, setSubmitting] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -57,7 +58,7 @@ export default function ContactSection() {
         const data = (await res.json().catch(() => null)) as { error?: string } | null
         throw new Error(data?.error ?? '送信に失敗しました')
       }
-      setSubmitted(true)
+      router.push('/thanks/')
     } catch (err) {
       setErrorMessage(err instanceof Error ? err.message : '送信に失敗しました')
     } finally {
@@ -81,24 +82,7 @@ export default function ContactSection() {
           </p>
         </div>
 
-        {submitted ? (
-          /* 送信完了メッセージ */
-          <div className="rounded-xl bg-[#f3f9e8] border border-[#b8d97e] p-8 text-center">
-            <div className="w-12 h-12 rounded-full bg-[#8fc23f] flex items-center justify-center mx-auto mb-4">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </div>
-            <p className="text-base font-bold text-[#1a1a1a] mb-2" style={{ fontFamily: 'var(--font-heading)' }}>
-              送信しました
-            </p>
-            <p className="text-sm text-[#4a4a4a]">
-              ご入力いただいたメールアドレスに自動返信メールをお送りしました。担当者より順次ご連絡いたします。
-            </p>
-          </div>
-        ) : (
-          /* フォーム */
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             {/* 氏名 */}
             <div className="flex flex-col gap-1.5">
               <label className="text-sm font-medium text-[#1a1a1a]">
@@ -232,8 +216,7 @@ export default function ContactSection() {
             >
               {submitting ? '送信中...' : '送信する'}
             </button>
-          </form>
-        )}
+        </form>
       </div>
     </section>
   )

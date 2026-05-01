@@ -18,17 +18,13 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* ロゴ */}
-        <Link href="/" className="flex items-center gap-2 shrink-0">
+        <Link href="/" className="flex items-center shrink-0 -ml-[40px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/campus/logo.png"
-            alt="CABUILD"
-            height={28}
-            className="object-contain h-7"
+            src="/campus/campus-logo.png"
+            alt="CABUILDキャンパス"
+            className="object-contain h-[42px]"
           />
-          <span className="text-sm font-medium text-gray-500 hidden sm:inline">
-            キャンパス
-          </span>
         </Link>
 
         {/* デスクトップナビ */}
