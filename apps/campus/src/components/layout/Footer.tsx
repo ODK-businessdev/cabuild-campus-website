@@ -8,16 +8,13 @@ export default function Footer() {
     <footer className="bg-gray-50 border-t border-gray-200">
       <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
         {/* ロゴ */}
-        <div className="flex flex-col items-center sm:items-start gap-3">
-          <div className="flex items-center gap-2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/campus/logo.png"
-              alt="CABUILD"
-              className="h-6 object-contain"
-            />
-            <span className="text-sm font-medium text-gray-500">キャンパス</span>
-          </div>
+        <div className="flex flex-col items-center sm:items-start gap-3 sm:-ml-[15px]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/campus/campus-logo.png"
+            alt="CABUILDキャンパス"
+            className="h-[34px] object-contain -ml-[20px]"
+          />
           <p className="text-xs text-gray-500">
             提供：株式会社ポトス（ODKソリューションズグループ）
           </p>
