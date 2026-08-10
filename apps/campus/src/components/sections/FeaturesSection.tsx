@@ -230,7 +230,7 @@ export default function FeaturesSection() {
               <div className="mt-2 relative rounded-xl overflow-hidden border border-[#e5e5e5] h-[220px] md:h-[480px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/campus/career-type-assessment-v2.png"
+                  src="/career-type-assessment-v2.png"
                   alt="キャリアタイプ診断 アセスメント結果"
                   style={{ width: '100%', display: 'block' }}
                 />
@@ -240,7 +240,7 @@ export default function FeaturesSection() {
                 />
                 <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4">
                   <button
-                    onClick={() => setModalImage({ src: '/campus/career-type-report-v2.png', title: 'キャリアタイプ診断 レポートサンプル' })}
+                    onClick={() => setModalImage({ src: '/career-type-report-v2.png', title: 'キャリアタイプ診断 レポートサンプル' })}
                     className="inline-flex items-center gap-1.5 md:gap-2 h-8 md:h-10 px-3 md:px-5 rounded text-xs md:text-sm font-medium transition-colors duration-200 shadow-sm"
                     style={{ color: '#299dd9', backgroundColor: '#ffffff', border: '1px solid #299dd9' }}
                   >
@@ -257,7 +257,7 @@ export default function FeaturesSection() {
               <div className="mt-2 relative rounded-xl overflow-hidden border border-[#e5e5e5] h-[220px] md:h-[480px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/campus/company-research-sample.png"
+                  src="/company-research-sample.png"
                   alt="企業研究 画面サンプル"
                   style={{ width: '100%', display: 'block' }}
                 />
@@ -267,7 +267,7 @@ export default function FeaturesSection() {
                 />
                 <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4">
                   <button
-                    onClick={() => setModalImage({ src: '/campus/company-research-sample.png', title: '企業研究 画面サンプル' })}
+                    onClick={() => setModalImage({ src: '/company-research-sample.png', title: '企業研究 画面サンプル' })}
                     className="inline-flex items-center gap-1.5 md:gap-2 h-8 md:h-10 px-3 md:px-5 rounded text-xs md:text-sm font-medium transition-colors duration-200 shadow-sm"
                     style={{ color: '#299dd9', backgroundColor: '#ffffff', border: '1px solid #299dd9' }}
                   >
@@ -284,7 +284,7 @@ export default function FeaturesSection() {
               <div className="mt-2 relative rounded-xl overflow-hidden border border-[#e5e5e5] h-[220px] md:h-[480px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/campus/es-correction-sample.png"
+                  src="/es-correction-sample.png"
                   alt="ES添削 画面サンプル"
                   style={{ width: '100%', display: 'block' }}
                 />
@@ -294,7 +294,7 @@ export default function FeaturesSection() {
                 />
                 <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4">
                   <button
-                    onClick={() => setModalImage({ src: '/campus/es-correction-sample.png', title: 'ES添削 画面サンプル' })}
+                    onClick={() => setModalImage({ src: '/es-correction-sample.png', title: 'ES添削 画面サンプル' })}
                     className="inline-flex items-center gap-1.5 md:gap-2 h-8 md:h-10 px-3 md:px-5 rounded text-xs md:text-sm font-medium transition-colors duration-200 shadow-sm"
                     style={{ color: '#299dd9', backgroundColor: '#ffffff', border: '1px solid #299dd9' }}
                   >
@@ -311,7 +311,7 @@ export default function FeaturesSection() {
               <div className="mt-2 relative rounded-xl overflow-hidden border border-[#e5e5e5] h-[220px] md:h-[480px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/campus/self-analysis-sample.png"
+                  src="/self-analysis-sample.png"
                   alt="自己分析 完了画面"
                   style={{ width: '100%', display: 'block' }}
                 />
@@ -321,7 +321,7 @@ export default function FeaturesSection() {
                 />
                 <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4">
                   <button
-                    onClick={() => setModalImage({ src: '/campus/self-analysis-sample.png', title: '自己分析 完了画面サンプル' })}
+                    onClick={() => setModalImage({ src: '/self-analysis-sample.png', title: '自己分析 完了画面サンプル' })}
                     className="inline-flex items-center gap-1.5 md:gap-2 h-8 md:h-10 px-3 md:px-5 rounded text-xs md:text-sm font-medium transition-colors duration-200 shadow-sm"
                     style={{ color: '#299dd9', backgroundColor: '#ffffff', border: '1px solid #299dd9' }}
                   >

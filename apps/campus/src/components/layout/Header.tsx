@@ -21,7 +21,7 @@ export default function Header() {
         <Link href="/" className="flex items-center shrink-0 -ml-[40px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/campus/campus-logo.png"
+            src="/campus-logo.png"
             alt="CABUILDキャンパス"
             className="object-contain h-[42px]"
           />

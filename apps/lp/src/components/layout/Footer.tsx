@@ -1,6 +1,7 @@
+// LP 内に該当ページ・セクションがないため、いずれも他ドメインへ絶対URLで飛ばす
 const footerLinks = [
-  { label: 'プライバシーポリシー', href: '/privacy' },
-  { label: 'お問い合わせ', href: '#contact' },
+  { label: 'プライバシーポリシー', href: 'https://cabuild.jp/privacy' },
+  { label: 'お問い合わせ', href: 'https://campus-web.cabuild.jp/#contact' },
 ]
 
 export default function Footer() {
@@ -10,7 +11,7 @@ export default function Footer() {
         <div className="flex flex-col items-center sm:items-start gap-3">
           <div className="flex items-center gap-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/campus/lp/cabuild-logo.png" alt="CABUILD" className="h-6 object-contain" />
+            <img src="/cabuild-logo.png" alt="CABUILD" className="h-6 object-contain" />
             <span className="text-sm font-medium text-gray-500">キャンパス</span>
           </div>
           <p className="text-xs text-gray-500">

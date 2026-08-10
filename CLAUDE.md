@@ -34,35 +34,37 @@
 
 ## 1.5. ドメイン・配信構成（重要）
 
-このリポジトリは **モノレポ構成** で、`apps/campus`（学生向けサイト）と `apps/lp`（LP）を持つ。`cabuild.jp` 自体は **別リポジトリ・別 Vercel プロジェクトの企業サイト** で、その `vercel.json` の rewrites で各サブパスを当リポジトリの Vercel プロジェクトに転送している。
+このリポジトリは **モノレポ構成** で、`apps/campus`（学生向けサイト）と `apps/lp`（LP）を持つ。
+両アプリは **それぞれ独立したサブドメイン** で配信する。企業サイト（`cabuild.jp`／別リポジトリ）からの
+rewrite による配信は **廃止済み**。したがって **両アプリとも `basePath` を持たない**。
 
 ### 配信URLとリポジトリ・プロジェクトの対応
 
-| 公開URL | 配信元 Vercel プロジェクト | 当リポジトリ内のアプリ | basePath |
+| 公開URL | Vercel プロジェクト | 当リポジトリ内のアプリ | basePath |
 |---|---|---|---|
-| `cabuild.jp/campus/*` | `cabuild-campus-website.vercel.app` | `apps/campus` | `/campus` |
-| `cabuild.jp/campus/lp/*` | `cabuild-campus-website-lp.vercel.app` | `apps/lp` | `/campus/lp` |
-| `cabuild.jp/*`（その他） | 企業サイト（別リポジトリ） | - | - |
+| `campus-web.cabuild.jp` | `cabuild-ai/cabuild-campus-website` | `apps/campus` | なし |
+| `campus-lp.cabuild.jp` | `cabuild-ai/cabuild-campus-website-lp` | `apps/lp` | なし |
+| `campus.cabuild.jp` | **当リポジトリ外**（プロダクト本体アプリ） | - | - |
+| `cabuild.jp/*` | 企業サイト（別リポジトリ） | - | - |
 
-### 企業サイト側の rewrite 設定（参考・別リポジトリ）
+- `campus.cabuild.jp` は **サービスサイトではなくプロダクト本体**（`/login` へ遷移）。
+  各所の「無料で始める」系 CTA はこのドメインへの送客リンクであり、変更しないこと。
 
-```json
-{
-  "rewrites": [
-    { "source": "/campus/lp/:path*", "destination": "https://cabuild-campus-website-lp.vercel.app/campus/lp/:path*" },
-    { "source": "/campus/:path*",    "destination": "https://cabuild-campus-website.vercel.app/campus/:path*" }
-  ]
-}
-```
+### URL・アセットのルール
+
+- 公開画像は **`public/` 直下**に配置し、コードからは `/xxx.png` で参照する
+  （`public/campus/...` のような basePath 相当のディレクトリは作らない）
+- アプリ間のリンクは**絶対URL**で書く（例: LP のグローバルナビ → `https://campus-web.cabuild.jp/#features`）
+- `NEXT_PUBLIC_SITE_URL` が未設定の場合、`metadataBase` / `sitemap` / `robots` は
+  各アプリの本番サブドメインをフォールバックとして使う
+- `trailingSlash`: `apps/campus` は `true`、`apps/lp` は `false`（各アプリ内で一貫していればよい）
 
 ### 開発時の注意点
 
-- リダイレクト・404・CORS 等の問題が発生したら **「企業サイト → rewrite → campus/LP」の3層構造** で考える
-- `trailingSlash` の設定変更時は企業サイト側の挙動（trailing slash 除去）と衝突しないか注意（過去にループ事故あり）
-- 画像やAPI など deep path を扱うときは rewrite 経由でも到達できるか curl で必ず確認
-- `apps/campus` には `skipTrailingSlashRedirect: true` を設定済み（API ルートの 308 ループ回避のため）
-- 公開画像は `public/campus/...` または `public/campus/lp/...` 配下に配置（`/campus/xxx` の URL で配信されるため）
-- 企業サイトの `vercel.json` 編集は**別リポジトリでの作業**
+- ドメイン追加・変更は Vercel のプロジェクト設定（Settings → Domains）と DNS の CNAME 側の作業
+- 各 Vercel プロジェクトの **Root Directory** が `apps/campus` / `apps/lp` を指していることを確認する
+- 旧 URL（`cabuild.jp/campus/*`, `cabuild.jp/campus/lp/*`）からの誘導が必要な場合は、
+  **企業サイト側リポジトリ**の `vercel.json` に redirect を追加する（当リポジトリの作業ではない）
 
 ---
 
@@ -114,8 +116,10 @@ src/
 ├── app/
 │   ├── layout.tsx               # ルートレイアウト（フォント・OGP設定）
 │   ├── page.tsx                 # トップ（各セクション呼び出し）
-│   └── privacy/
-│       └── page.tsx             # プライバシーポリシー
+│   └── thanks/
+│       └── page.tsx             # お問い合わせ完了
+│   # プライバシーポリシーは当リポジトリでは持たず、
+│   # 企業サイトの https://cabuild.jp/privacy を参照する
 ├── components/
 │   ├── layout/
 │   │   ├── Header.tsx

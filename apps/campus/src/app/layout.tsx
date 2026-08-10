@@ -24,10 +24,10 @@ const kleeOne = Klee_One({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? 'https://cabuild.jp'
+    process.env.NEXT_PUBLIC_SITE_URL ?? 'https://campus-web.cabuild.jp'
   ),
   alternates: {
-    canonical: '/campus/',
+    canonical: '/',
   },
   title: 'CABUILDキャンパス | 就活は、出会いだ。',
   description:
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     locale: 'ja_JP',
     images: [
       {
-        url: '/campus/og-image.png',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: 'CABUILDキャンパス',
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     title: 'CABUILDキャンパス | 就活は、出会いだ。',
     description:
       '自己分析・企業研究・ES添削をAIでサポート。就活に必要な準備ツールがすべて揃っています。',
-    images: ['/campus/og-image.png'],
+    images: ['/og-image.png'],
   },
 }
 

@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 
 const navLinks = [
-  { label: 'CABUILDキャンパスとは', href: 'https://cabuild.jp/campus#experience' },
-  { label: '機能', href: 'https://cabuild.jp/campus#features' },
-  { label: '使い方', href: 'https://cabuild.jp/campus#howto' },
-  { label: 'よくある質問', href: 'https://cabuild.jp/campus#faq' },
+  { label: 'CABUILDキャンパスとは', href: 'https://campus-web.cabuild.jp/#experience' },
+  { label: '機能', href: 'https://campus-web.cabuild.jp/#features' },
+  { label: '使い方', href: 'https://campus-web.cabuild.jp/#howto' },
+  { label: 'よくある質問', href: 'https://campus-web.cabuild.jp/#faq' },
 ]
 
 export default function Header() {
@@ -19,7 +19,7 @@ export default function Header() {
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 shrink-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/campus/lp/cabuild-logo.png" alt="CABUILD" className="h-7 object-contain" />
+          <img src="/cabuild-logo.png" alt="CABUILD" className="h-7 object-contain" />
           <span className="text-sm font-medium text-gray-500">キャンパス</span>
         </Link>
 

@@ -86,7 +86,7 @@ export default function OutputSection() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/campus/lp/output-sample.png"
+              src="/output-sample.png"
               alt="自己分析AI 出力画面イメージ"
               className="w-full h-auto"
               style={{ objectFit: 'contain' }}
@@ -147,7 +147,7 @@ export default function OutputSection() {
             <div className="overflow-y-auto flex-1">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/campus/lp/self-analysis-full.png"
+                src="/self-analysis-full.png"
                 alt="自己分析AI 出力画面サンプル"
                 className="w-full h-auto"
                 style={{ objectFit: 'contain', display: 'block' }}
