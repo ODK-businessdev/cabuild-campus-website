@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="flex flex-col items-center sm:items-start gap-3 sm:-ml-[15px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/campus/campus-logo.png"
+            src="/campus-logo.png"
             alt="CABUILDキャンパス"
             className="h-[34px] object-contain -ml-[20px]"
           />

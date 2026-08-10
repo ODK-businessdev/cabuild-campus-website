@@ -24,7 +24,7 @@ const securityHeaders = [
 ]
 
 const nextConfig: NextConfig = {
-  basePath: '/campus',
+  // campus-web.cabuild.jp を独立サブドメインで配信するため basePath は持たない
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
   images: {

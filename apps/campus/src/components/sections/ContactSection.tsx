@@ -22,7 +22,7 @@ const contactTypeOptions: { value: ContactType; label: string }[] = [
 const isStudentType = (type: ContactType) =>
   type === 'student_service' || type === 'student_account' || type === 'student_technical'
 
-const CONTACT_API = '/campus/api/contact'
+const CONTACT_API = '/api/contact'
 
 export default function ContactSection() {
   const router = useRouter()
