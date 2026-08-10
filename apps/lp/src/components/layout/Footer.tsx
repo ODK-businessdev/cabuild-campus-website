@@ -1,6 +1,7 @@
+// LP 内に該当ページ・セクションがないため、いずれも他ドメインへ絶対URLで飛ばす
 const footerLinks = [
-  { label: 'プライバシーポリシー', href: '/privacy' },
-  { label: 'お問い合わせ', href: '#contact' },
+  { label: 'プライバシーポリシー', href: 'https://cabuild.jp/privacy' },
+  { label: 'お問い合わせ', href: 'https://campus-web.cabuild.jp/#contact' },
 ]
 
 export default function Footer() {

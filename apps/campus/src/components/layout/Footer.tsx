@@ -1,5 +1,6 @@
+// プライバシーポリシーは企業サイト（別リポジトリ）で管理しているため絶対URLで参照する
 const footerLinks = [
-  { label: 'プライバシーポリシー', href: '/privacy' },
+  { label: 'プライバシーポリシー', href: 'https://cabuild.jp/privacy' },
   { label: 'お問い合わせ', href: '#contact' },
 ]
 

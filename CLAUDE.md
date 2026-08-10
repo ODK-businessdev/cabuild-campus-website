@@ -116,8 +116,10 @@ src/
 ├── app/
 │   ├── layout.tsx               # ルートレイアウト（フォント・OGP設定）
 │   ├── page.tsx                 # トップ（各セクション呼び出し）
-│   └── privacy/
-│       └── page.tsx             # プライバシーポリシー
+│   └── thanks/
+│       └── page.tsx             # お問い合わせ完了
+│   # プライバシーポリシーは当リポジトリでは持たず、
+│   # 企業サイトの https://cabuild.jp/privacy を参照する
 ├── components/
 │   ├── layout/
 │   │   ├── Header.tsx
