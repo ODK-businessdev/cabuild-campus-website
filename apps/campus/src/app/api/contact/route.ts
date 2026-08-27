@@ -1,8 +1,11 @@
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { notifyContactToSlack } from '@/lib/notifications/contact-slack'
 
+// FROM は Resend で認証済みのドメイン（auth.cabuild.jp）である必要がある
 const FROM = 'CABUILDキャンパス <noreply@auth.cabuild.jp>'
-const ADMIN_TO = 'information@pottos.jp'
+// 運営窓口の Google グループ（共同トレイ）。返信は学生の replyTo 宛に行える
+const ADMIN_TO = 'campus-support@nin-japan.com'
 
 const contactTypeLabels: Record<string, string> = {
   student_service: '学生：サービスについて',
@@ -90,10 +93,22 @@ export async function POST(req: Request) {
     '',
     '※本メールは自動返信です。このメールに返信いただいてもお答えできかねますのでご了承ください。',
     '',
-    '株式会社ポトス（ODKソリューションズグループ）',
+    'NINJAPAN株式会社（ODKソリューションズグループ）',
     'CABUILDキャンパス'
   )
 
+  // Slack 通知はメール送信と並行して行う。メールが失敗しても問い合わせ内容が
+  // Slack に残るよう、メールの成否に依存させない（内部で例外を捕捉するため throw しない）
+  const slackNotified = notifyContactToSlack({
+    typeLabel,
+    name,
+    email,
+    university: studentTypes.has(contactType) ? university : undefined,
+    grade: studentTypes.has(contactType) ? grade : undefined,
+    message,
+  })
+
+  let mailFailed = false
   try {
     const [adminResult, userResult] = await Promise.all([
       resend.emails.send({
@@ -113,12 +128,18 @@ export async function POST(req: Request) {
 
     if (adminResult.error || userResult.error) {
       console.error('Resend error', { admin: adminResult.error, user: userResult.error })
-      return NextResponse.json({ error: 'メール送信に失敗しました' }, { status: 500 })
+      mailFailed = true
     }
-
-    return NextResponse.json({ ok: true })
   } catch (err) {
     console.error('Contact form error', err)
+    mailFailed = true
+  }
+
+  await slackNotified
+
+  if (mailFailed) {
     return NextResponse.json({ error: 'メール送信に失敗しました' }, { status: 500 })
   }
+
+  return NextResponse.json({ ok: true })
 }
