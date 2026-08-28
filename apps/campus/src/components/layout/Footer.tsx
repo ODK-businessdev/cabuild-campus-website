@@ -1,7 +1,8 @@
-// プライバシーポリシーは企業サイト（別リポジトリ）で管理しているため絶対URLで参照する
+// プライバシーポリシーは提供元 NINJAPAN のコーポレートサイトで管理しているため絶対URLで参照する
+// TODO: 法務確認後、CABUILDキャンパス専用のプライバシーポリシーが公開されたらURLを差し替える
 const footerLinks = [
-  { label: 'プライバシーポリシー', href: 'https://cabuild.jp/privacy' },
-  { label: 'お問い合わせ', href: '#contact' },
+  { label: 'プライバシーポリシー', href: 'https://www.nin-japan.com/privacy_policy/', external: true },
+  { label: 'お問い合わせ', href: '#contact', external: false },
 ]
 
 export default function Footer() {
@@ -17,7 +18,7 @@ export default function Footer() {
             className="h-[34px] object-contain -ml-[20px]"
           />
           <p className="text-xs text-gray-500">
-            提供：株式会社ポトス（ODKソリューションズグループ）
+            提供：NINJAPAN株式会社（ODKソリューションズグループ）
           </p>
         </div>
 
@@ -28,6 +29,7 @@ export default function Footer() {
               <a
                 key={link.href}
                 href={link.href}
+                {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 className="text-xs text-gray-500 hover:text-gray-700 transition-colors duration-200"
               >
                 {link.label}
@@ -35,7 +37,7 @@ export default function Footer() {
             ))}
           </nav>
           <p className="text-xs text-gray-400">
-            © {new Date().getFullYear()} 株式会社ポトス. All rights reserved.
+            © {new Date().getFullYear()} NINJAPAN株式会社. All rights reserved.
           </p>
         </div>
       </div>
